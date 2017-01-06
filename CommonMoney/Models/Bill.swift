@@ -19,12 +19,12 @@ class Bill: Mappable {
     var id: String?
     var title: String?
     var ownerId: String?
-    var date: Date?
+    var date: Double?
     var price: CGFloat?
     var type: String?//BillType?
     var photo: UIImage?
     
-    init(id: String, title: String, ownerId: String, date: Date, fullPrice: CGFloat, type: String, photo: UIImage?) {
+    init(id: String, title: String, ownerId: String, date: Double, fullPrice: CGFloat, type: String, photo: UIImage?) {
         self.id = id
         self.title = title
         self.date = date
@@ -48,6 +48,7 @@ class Bill: Mappable {
         self.price <- map["fullPrice"]
         self.type <- map["type"]
         self.photo <- map["photo"]
+        self.date <- map["date"]
     }
     
 }

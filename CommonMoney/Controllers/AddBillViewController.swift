@@ -146,7 +146,7 @@ class AddBillViewController: BaseViewController, UIImagePickerControllerDelegate
         
         let newBillId = newBillRef.key
         
-        let bill = Bill.init(id: newBillId, title: title, ownerId: "12345", date: dateFormatter.date(from: date)!, fullPrice: CGFloat(NSString(string: price).floatValue), type: type, photo: imageView.billImage.image)
+        let bill = Bill.init(id: newBillId, title: title, ownerId: "12345", date: dateFormatter.date(from: date)!.timeIntervalSince1970, fullPrice: CGFloat(NSString(string: price).floatValue), type: type, photo: imageView.billImage.image)
 
         // 4
         //TODO: no date in batabase

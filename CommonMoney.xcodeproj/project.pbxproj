@@ -287,6 +287,7 @@
 				159167761DE1B6840040FDD2 /* Resources */,
 				2C2CEB7778367C33A41F82DA /* [CP] Embed Pods Frameworks */,
 				0EA3E1E9B9EE00323C3B1F26 /* [CP] Copy Pods Resources */,
+				15EA39921E200BFC00DC48C7 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -433,6 +434,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CommonMoney/Pods-CommonMoney-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		15EA39921E200BFC00DC48C7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#Script to make TODO a Warning\nif [ \"${CONFIGURATION}\" = \"Debug\" ]\nthen\nTAGS=\"TODO:\"\necho \"searching ${SRCROOT} for ${TAGS}\"\nfind \"${SRCROOT}\" \\( -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"\nfi";
 		};
 		2C2CEB7778367C33A41F82DA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

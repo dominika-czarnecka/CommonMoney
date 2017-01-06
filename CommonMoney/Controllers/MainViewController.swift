@@ -8,13 +8,14 @@
 
 import UIKit
 import FirebaseDatabase
-//import ObjectMapper
+
+import ObjectMapper
 
 class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     let ref = FIRDatabase.database().reference(withPath: "bills")
     let tableView = UITableView()
-    var bills: [Bill]?
+    var bills: [Bill] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +57,7 @@ class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return bills != nil ? bills!.count : 0
+        return bills.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -68,13 +69,10 @@ class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         var cell: CMBillTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell") as! CMBillTableViewCell
         
         cell = CMBillTableViewCell.init(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
-        cell.titleLabel.text = bills?[indexPath.row].title
+        cell.titleLabel.text = bills[indexPath.row].title
         
-        let dateFormatter = DateFormatter.init()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        
-        cell.ownerAndDateLabel.text = dateFormatter.string(from: (bills?[indexPath.row].date)!)
-        cell.priceLabel.text = bills?[indexPath.row].price?.description
+        cell.ownerAndDateLabel.text = Date.init(timeIntervalSince1970: Double(bills[indexPath.row].date ?? 0)).dateToString(format: "dd-MM-yyyy")
+        cell.priceLabel.text = bills[indexPath.row].price?.description
         cell.separatorView.backgroundColor = UIColor.blue
         
         return cell
@@ -85,25 +83,17 @@ class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     }
     
     func setupDatabaseObserver(){
+        //TODO: bill with homeID
         
-        // 1
-//        ref.observeSingleEvent(of: .value, with:  { (snapshot)  in
-//            
-//            // 3
-//            for item in snapshot.children {
-//                // 4
-//                //TODO: map?
-//                let newItem = Bill(map: (item as! FIRDataSnapshot).value as! Map)
-//                
-//                if newItem != nil{
-//                    self.bills?.append(newItem!)
-//                }
-//                
-//            }
-//            
-//            // 5
-//            self.tableView.reloadData()
-//        })
+        ref.queryOrdered(byChild: "title").observe(.childAdded, with: { (snapshot) in
+            
+            print(snapshot.debugDescription)
+            
+            if let bill = Mapper<Bill>().map(JSON: snapshot.value as? [String : Any] ?? [:]) {
+                self.bills.append(bill)
+            }
+            self.tableView.reloadData()
+        })
     }
     
 }

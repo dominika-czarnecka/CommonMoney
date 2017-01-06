@@ -40,10 +40,55 @@ extension UIFont {
     }
 }
 
-extension UILabel{
+extension Date {
     
-    func setupAsMultipleLineLabel(){
+    func isToday() -> Bool {
+        return NSCalendar.current.isDateInToday(self)
+    }
+    
+    func dateToString(format: String) -> String{
+        let formatter = DateFormatter()
+        let locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        
+        formatter.locale = locale as Locale!
+        formatter.dateFormat = format
+        
+        return formatter.string(from: self)
+    }
+    
+    func isGreaterThanDate(dateToCompare: Date) -> Bool {
+        var isGreater = false
+        if self.compare(dateToCompare) == ComparisonResult.orderedDescending {
+            isGreater = true
+        }
+        return isGreater
+    }
+    
+    func isLessThanDate(dateToCompare: Date) -> Bool {
+        var isLess = false
+        if self.compare(dateToCompare) == ComparisonResult.orderedAscending {
+            isLess = true
+        }
+        return isLess
+    }
+    
+    func equalToDate(dateToCompare: Date) -> Bool {
+        var isEqualTo = false
+        if self.compare(dateToCompare) == ComparisonResult.orderedSame {
+            isEqualTo = true
+        }
+        return isEqualTo
+    }
+    
+    func localDate() -> Date{
+        
+        var dayComponent = DateComponents.init()
+        var theCalendar = Calendar.current
+        theCalendar.timeZone = TimeZone.init(identifier: "GMT")!
+        dayComponent = (Calendar.current as NSCalendar).components([NSCalendar.Unit.hour, NSCalendar.Unit.minute, .second, .day, .month, .year], from: self)
+        return theCalendar.date(from: dayComponent)!
         
     }
     
 }
+

@@ -114,21 +114,30 @@ class LoginOrRegisterViewController: BaseViewController, UIScrollViewDelegate {
     
     //MARK: Buttons actions
     func loginButtonAction(){
+        //TODO: change before realase
         
-        guard let email = loginView.loginTextField.titleLabel.text, let password = loginView.passwordTextField.titleLabel.text else {
-            loginView.loginTextField.shake()
-            loginView.passwordTextField.shake()
-            return
-        }
+//        guard let email = loginView.loginTextField.titleLabel.text, let password = loginView.passwordTextField.titleLabel.text else {
+//            loginView.loginTextField.shake()
+//            loginView.passwordTextField.shake()
+//            return
+//        }
+//        
+//        FIRAuth.auth()?.signIn(withEmail: email, password: password) { ( user, error) in
+//            if let error = error {
+//                print(error.localizedDescription)
+//                self.loginView.passwordTextField.shake()
+//                self.loginView.loginTextField.shake()
+//                return
+//            }
         
-        FIRAuth.auth()?.signIn(withEmail: email, password: password) { ( user, error) in
-            if let error = error {
-                print(error.localizedDescription)
-                self.loginView.passwordTextField.shake()
-                self.loginView.loginTextField.shake()
-                return
-            }
-            
+                FIRAuth.auth()?.signIn(withEmail: "dominika@gmail.com", password: "dominika") { ( user, error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                        self.loginView.passwordTextField.shake()
+                        self.loginView.loginTextField.shake()
+                        return
+                    }
+        
             self.navigationController?.pushViewController(MainViewController(), animated: true)
         }
     }
