@@ -1,0 +1,761 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1528C5311DE60A09005DD72D /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1528C5301DE60A09005DD72D /* Home.swift */; };
+		152EB9DA1DF9974800213DD5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 152EB9D91DF9974800213DD5 /* GoogleService-Info.plist */; };
+		15445BCA1DE1B08700681801 /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15445BC91DE1B08700681801 /* Bill.swift */; };
+		15445BCE1DE1B51300681801 /* Cotenant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15445BCD1DE1B51300681801 /* Cotenant.swift */; };
+		1568F5DF1E166BB400315659 /* AddBillImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1568F5DE1E166BB400315659 /* AddBillImageView.swift */; };
+		1568F5E21E1672E400315659 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1568F5E11E1672E400315659 /* LoginView.swift */; };
+		157A0B921DE61CD100C22E3F /* CMTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157A0B911DE61CD100C22E3F /* CMTextField.swift */; };
+		158B74911DE63EB9005306D5 /* CMBillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158B74901DE63EB9005306D5 /* CMBillTableViewCell.swift */; };
+		1591677C1DE1B6840040FDD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1591677B1DE1B6840040FDD2 /* AppDelegate.swift */; };
+		159167831DE1B6840040FDD2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 159167821DE1B6840040FDD2 /* Assets.xcassets */; };
+		159167861DE1B6840040FDD2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 159167841DE1B6840040FDD2 /* LaunchScreen.storyboard */; };
+		159167911DE1B6840040FDD2 /* CommonMoneyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159167901DE1B6840040FDD2 /* CommonMoneyTests.swift */; };
+		1591679C1DE1B6850040FDD2 /* CommonMoneyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1591679B1DE1B6850040FDD2 /* CommonMoneyUITests.swift */; };
+		159167AC1DE1B6850040FDD2 /* LoginOrRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159167AB1DE1B6850040FDD2 /* LoginOrRegisterViewController.swift */; };
+		159167AE1DE1B6850040FDD2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159167AD1DE1B6850040FDD2 /* MainViewController.swift */; };
+		159167B01DE1B6850040FDD2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159167AF1DE1B6850040FDD2 /* BaseViewController.swift */; };
+		159167B21DE1B6850040FDD2 /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159167B11DE1B6850040FDD2 /* Constans.swift */; };
+		159167B41DE1B6850040FDD2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159167B31DE1B6850040FDD2 /* Extensions.swift */; };
+		15B0CD451DF350D500A7C8B4 /* AddBillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B0CD441DF350D500A7C8B4 /* AddBillViewController.swift */; };
+		15EA39901E1FF59100DC48C7 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EA398F1E1FF59100DC48C7 /* RegisterView.swift */; };
+		15EB9B071DE629B2002C6C76 /* CMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EB9B061DE629B2002C6C76 /* CMButton.swift */; };
+		15EB9B121DE62BF7002C6C76 /* FiraSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15EB9B091DE62BF7002C6C76 /* FiraSans-Bold.ttf */; };
+		15EB9B131DE62BF7002C6C76 /* FiraSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15EB9B0A1DE62BF7002C6C76 /* FiraSans-BoldItalic.ttf */; };
+		15EB9B141DE62BF7002C6C76 /* FiraSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15EB9B0B1DE62BF7002C6C76 /* FiraSans-Italic.ttf */; };
+		15EB9B151DE62BF7002C6C76 /* FiraSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15EB9B0C1DE62BF7002C6C76 /* FiraSans-Light.ttf */; };
+		15EB9B161DE62BF7002C6C76 /* FiraSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15EB9B0D1DE62BF7002C6C76 /* FiraSans-LightItalic.ttf */; };
+		15EB9B171DE62BF7002C6C76 /* FiraSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15EB9B0E1DE62BF7002C6C76 /* FiraSans-Medium.ttf */; };
+		15EB9B181DE62BF7002C6C76 /* FiraSans-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15EB9B0F1DE62BF7002C6C76 /* FiraSans-MediumItalic.ttf */; };
+		15EB9B191DE62BF7002C6C76 /* FiraSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15EB9B101DE62BF7002C6C76 /* FiraSans-Regular.ttf */; };
+		15EB9B1A1DE62BF7002C6C76 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 15EB9B111DE62BF7002C6C76 /* OFL.txt */; };
+		2909D98CB819F84E03B0EB75 /* Pods_CommonMoney.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08B923D5DBBE6114A3B442C /* Pods_CommonMoney.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1591678D1DE1B6840040FDD2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 159167701DE1B6840040FDD2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 159167771DE1B6840040FDD2;
+			remoteInfo = CommonMoney;
+		};
+		159167981DE1B6840040FDD2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 159167701DE1B6840040FDD2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 159167771DE1B6840040FDD2;
+			remoteInfo = CommonMoney;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1528C5301DE60A09005DD72D /* Home.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Home.swift; path = Models/Home.swift; sourceTree = "<group>"; };
+		152EB9D91DF9974800213DD5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		15445BC91DE1B08700681801 /* Bill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bill.swift; path = Models/Bill.swift; sourceTree = "<group>"; };
+		15445BCD1DE1B51300681801 /* Cotenant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Cotenant.swift; path = Models/Cotenant.swift; sourceTree = "<group>"; };
+		1568F5DE1E166BB400315659 /* AddBillImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddBillImageView.swift; path = Controllers/AddBill/AddBillImageView.swift; sourceTree = "<group>"; };
+		1568F5E11E1672E400315659 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = Controllers/LoginOrRegister/LoginView.swift; sourceTree = "<group>"; };
+		157A0B911DE61CD100C22E3F /* CMTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CMTextField.swift; path = SupportingFiles/Views/CMTextField.swift; sourceTree = "<group>"; };
+		158B74901DE63EB9005306D5 /* CMBillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CMBillTableViewCell.swift; path = SupportingFiles/Views/CMBillTableViewCell.swift; sourceTree = "<group>"; };
+		159167781DE1B6840040FDD2 /* CommonMoney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CommonMoney.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1591677B1DE1B6840040FDD2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		159167821DE1B6840040FDD2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		159167851DE1B6840040FDD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		159167871DE1B6840040FDD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1591678C1DE1B6840040FDD2 /* CommonMoneyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CommonMoneyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		159167901DE1B6840040FDD2 /* CommonMoneyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonMoneyTests.swift; sourceTree = "<group>"; };
+		159167921DE1B6840040FDD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		159167971DE1B6840040FDD2 /* CommonMoneyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CommonMoneyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1591679B1DE1B6850040FDD2 /* CommonMoneyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonMoneyUITests.swift; sourceTree = "<group>"; };
+		1591679D1DE1B6850040FDD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		159167AB1DE1B6850040FDD2 /* LoginOrRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginOrRegisterViewController.swift; path = Controllers/LoginOrRegisterViewController.swift; sourceTree = "<group>"; };
+		159167AD1DE1B6850040FDD2 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Controllers/MainViewController.swift; sourceTree = "<group>"; };
+		159167AF1DE1B6850040FDD2 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseViewController.swift; path = Controllers/BaseViewController.swift; sourceTree = "<group>"; };
+		159167B11DE1B6850040FDD2 /* Constans.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constans.swift; path = SupportingFiles/Constans.swift; sourceTree = "<group>"; };
+		159167B31DE1B6850040FDD2 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = SupportingFiles/Extensions.swift; sourceTree = "<group>"; };
+		15B0CD441DF350D500A7C8B4 /* AddBillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddBillViewController.swift; path = Controllers/AddBillViewController.swift; sourceTree = "<group>"; };
+		15EA398F1E1FF59100DC48C7 /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterView.swift; path = Controllers/LoginOrRegister/RegisterView.swift; sourceTree = "<group>"; };
+		15EB9B061DE629B2002C6C76 /* CMButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CMButton.swift; path = SupportingFiles/Views/CMButton.swift; sourceTree = "<group>"; };
+		15EB9B091DE62BF7002C6C76 /* FiraSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSans-Bold.ttf"; sourceTree = "<group>"; };
+		15EB9B0A1DE62BF7002C6C76 /* FiraSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		15EB9B0B1DE62BF7002C6C76 /* FiraSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSans-Italic.ttf"; sourceTree = "<group>"; };
+		15EB9B0C1DE62BF7002C6C76 /* FiraSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSans-Light.ttf"; sourceTree = "<group>"; };
+		15EB9B0D1DE62BF7002C6C76 /* FiraSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		15EB9B0E1DE62BF7002C6C76 /* FiraSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSans-Medium.ttf"; sourceTree = "<group>"; };
+		15EB9B0F1DE62BF7002C6C76 /* FiraSans-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSans-MediumItalic.ttf"; sourceTree = "<group>"; };
+		15EB9B101DE62BF7002C6C76 /* FiraSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSans-Regular.ttf"; sourceTree = "<group>"; };
+		15EB9B111DE62BF7002C6C76 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
+		8A5ED669F9DFA1F48F0D3E42 /* Pods-CommonMoney.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CommonMoney.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CommonMoney/Pods-CommonMoney.debug.xcconfig"; sourceTree = "<group>"; };
+		D6D64C958459C303F6C34646 /* Pods-CommonMoney.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CommonMoney.release.xcconfig"; path = "Pods/Target Support Files/Pods-CommonMoney/Pods-CommonMoney.release.xcconfig"; sourceTree = "<group>"; };
+		E08B923D5DBBE6114A3B442C /* Pods_CommonMoney.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CommonMoney.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		159167751DE1B6840040FDD2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2909D98CB819F84E03B0EB75 /* Pods_CommonMoney.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		159167891DE1B6840040FDD2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		159167941DE1B6840040FDD2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		15343A641DF85D3200A25069 /* AddBill */ = {
+			isa = PBXGroup;
+			children = (
+				15B0CD441DF350D500A7C8B4 /* AddBillViewController.swift */,
+				1568F5DE1E166BB400315659 /* AddBillImageView.swift */,
+			);
+			name = AddBill;
+			sourceTree = "<group>";
+		};
+		15445BC81DE1B00C00681801 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				15445BC91DE1B08700681801 /* Bill.swift */,
+				15445BCD1DE1B51300681801 /* Cotenant.swift */,
+				1528C5301DE60A09005DD72D /* Home.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		1568F5E01E1672BF00315659 /* LoginOrRegister */ = {
+			isa = PBXGroup;
+			children = (
+				159167AB1DE1B6850040FDD2 /* LoginOrRegisterViewController.swift */,
+				1568F5E11E1672E400315659 /* LoginView.swift */,
+				15EA398F1E1FF59100DC48C7 /* RegisterView.swift */,
+			);
+			name = LoginOrRegister;
+			sourceTree = "<group>";
+		};
+		1591676F1DE1B6840040FDD2 = {
+			isa = PBXGroup;
+			children = (
+				1591677A1DE1B6840040FDD2 /* CommonMoney */,
+				1591678F1DE1B6840040FDD2 /* CommonMoneyTests */,
+				1591679A1DE1B6840040FDD2 /* CommonMoneyUITests */,
+				159167791DE1B6840040FDD2 /* Products */,
+				B552A58403EBBAC79CC17929 /* Pods */,
+				916F18DD8ACBF827D4C11905 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		159167791DE1B6840040FDD2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				159167781DE1B6840040FDD2 /* CommonMoney.app */,
+				1591678C1DE1B6840040FDD2 /* CommonMoneyTests.xctest */,
+				159167971DE1B6840040FDD2 /* CommonMoneyUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1591677A1DE1B6840040FDD2 /* CommonMoney */ = {
+			isa = PBXGroup;
+			children = (
+				15445BC81DE1B00C00681801 /* Models */,
+				159167A91DE1B6850040FDD2 /* Controllers */,
+				159167AA1DE1B6850040FDD2 /* SupportingFiles */,
+				1591677B1DE1B6840040FDD2 /* AppDelegate.swift */,
+				159167821DE1B6840040FDD2 /* Assets.xcassets */,
+				159167841DE1B6840040FDD2 /* LaunchScreen.storyboard */,
+				159167871DE1B6840040FDD2 /* Info.plist */,
+				152EB9D91DF9974800213DD5 /* GoogleService-Info.plist */,
+			);
+			path = CommonMoney;
+			sourceTree = "<group>";
+		};
+		1591678F1DE1B6840040FDD2 /* CommonMoneyTests */ = {
+			isa = PBXGroup;
+			children = (
+				159167901DE1B6840040FDD2 /* CommonMoneyTests.swift */,
+				159167921DE1B6840040FDD2 /* Info.plist */,
+			);
+			path = CommonMoneyTests;
+			sourceTree = "<group>";
+		};
+		1591679A1DE1B6840040FDD2 /* CommonMoneyUITests */ = {
+			isa = PBXGroup;
+			children = (
+				1591679B1DE1B6850040FDD2 /* CommonMoneyUITests.swift */,
+				1591679D1DE1B6850040FDD2 /* Info.plist */,
+			);
+			path = CommonMoneyUITests;
+			sourceTree = "<group>";
+		};
+		159167A91DE1B6850040FDD2 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1568F5E01E1672BF00315659 /* LoginOrRegister */,
+				15343A641DF85D3200A25069 /* AddBill */,
+				159167AD1DE1B6850040FDD2 /* MainViewController.swift */,
+				159167AF1DE1B6850040FDD2 /* BaseViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		159167AA1DE1B6850040FDD2 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				15EB9B081DE62BC8002C6C76 /* Fonts */,
+				1592459D1DE61C5F0078E0DD /* Views */,
+				159167B11DE1B6850040FDD2 /* Constans.swift */,
+				159167B31DE1B6850040FDD2 /* Extensions.swift */,
+			);
+			name = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		1592459D1DE61C5F0078E0DD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				157A0B911DE61CD100C22E3F /* CMTextField.swift */,
+				15EB9B061DE629B2002C6C76 /* CMButton.swift */,
+				158B74901DE63EB9005306D5 /* CMBillTableViewCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		15EB9B081DE62BC8002C6C76 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				15EB9B091DE62BF7002C6C76 /* FiraSans-Bold.ttf */,
+				15EB9B0A1DE62BF7002C6C76 /* FiraSans-BoldItalic.ttf */,
+				15EB9B0B1DE62BF7002C6C76 /* FiraSans-Italic.ttf */,
+				15EB9B0C1DE62BF7002C6C76 /* FiraSans-Light.ttf */,
+				15EB9B0D1DE62BF7002C6C76 /* FiraSans-LightItalic.ttf */,
+				15EB9B0E1DE62BF7002C6C76 /* FiraSans-Medium.ttf */,
+				15EB9B0F1DE62BF7002C6C76 /* FiraSans-MediumItalic.ttf */,
+				15EB9B101DE62BF7002C6C76 /* FiraSans-Regular.ttf */,
+				15EB9B111DE62BF7002C6C76 /* OFL.txt */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
+		916F18DD8ACBF827D4C11905 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E08B923D5DBBE6114A3B442C /* Pods_CommonMoney.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B552A58403EBBAC79CC17929 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8A5ED669F9DFA1F48F0D3E42 /* Pods-CommonMoney.debug.xcconfig */,
+				D6D64C958459C303F6C34646 /* Pods-CommonMoney.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		159167771DE1B6840040FDD2 /* CommonMoney */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 159167A01DE1B6850040FDD2 /* Build configuration list for PBXNativeTarget "CommonMoney" */;
+			buildPhases = (
+				B02A84E66B2B965F1CECAF8A /* [CP] Check Pods Manifest.lock */,
+				159167741DE1B6840040FDD2 /* Sources */,
+				159167751DE1B6840040FDD2 /* Frameworks */,
+				159167761DE1B6840040FDD2 /* Resources */,
+				2C2CEB7778367C33A41F82DA /* [CP] Embed Pods Frameworks */,
+				0EA3E1E9B9EE00323C3B1F26 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CommonMoney;
+			productName = CommonMoney;
+			productReference = 159167781DE1B6840040FDD2 /* CommonMoney.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1591678B1DE1B6840040FDD2 /* CommonMoneyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 159167A31DE1B6850040FDD2 /* Build configuration list for PBXNativeTarget "CommonMoneyTests" */;
+			buildPhases = (
+				159167881DE1B6840040FDD2 /* Sources */,
+				159167891DE1B6840040FDD2 /* Frameworks */,
+				1591678A1DE1B6840040FDD2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1591678E1DE1B6840040FDD2 /* PBXTargetDependency */,
+			);
+			name = CommonMoneyTests;
+			productName = CommonMoneyTests;
+			productReference = 1591678C1DE1B6840040FDD2 /* CommonMoneyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		159167961DE1B6840040FDD2 /* CommonMoneyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 159167A61DE1B6850040FDD2 /* Build configuration list for PBXNativeTarget "CommonMoneyUITests" */;
+			buildPhases = (
+				159167931DE1B6840040FDD2 /* Sources */,
+				159167941DE1B6840040FDD2 /* Frameworks */,
+				159167951DE1B6840040FDD2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				159167991DE1B6840040FDD2 /* PBXTargetDependency */,
+			);
+			name = CommonMoneyUITests;
+			productName = CommonMoneyUITests;
+			productReference = 159167971DE1B6840040FDD2 /* CommonMoneyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		159167701DE1B6840040FDD2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0810;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = dominika.czarnecka;
+				TargetAttributes = {
+					159167771DE1B6840040FDD2 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 2FP33MYDL3;
+						ProvisioningStyle = Automatic;
+					};
+					1591678B1DE1B6840040FDD2 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 2FP33MYDL3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 159167771DE1B6840040FDD2;
+					};
+					159167961DE1B6840040FDD2 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 2FP33MYDL3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 159167771DE1B6840040FDD2;
+					};
+				};
+			};
+			buildConfigurationList = 159167731DE1B6840040FDD2 /* Build configuration list for PBXProject "CommonMoney" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1591676F1DE1B6840040FDD2;
+			productRefGroup = 159167791DE1B6840040FDD2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				159167771DE1B6840040FDD2 /* CommonMoney */,
+				1591678B1DE1B6840040FDD2 /* CommonMoneyTests */,
+				159167961DE1B6840040FDD2 /* CommonMoneyUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		159167761DE1B6840040FDD2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15EB9B151DE62BF7002C6C76 /* FiraSans-Light.ttf in Resources */,
+				15EB9B1A1DE62BF7002C6C76 /* OFL.txt in Resources */,
+				15EB9B121DE62BF7002C6C76 /* FiraSans-Bold.ttf in Resources */,
+				159167861DE1B6840040FDD2 /* LaunchScreen.storyboard in Resources */,
+				15EB9B131DE62BF7002C6C76 /* FiraSans-BoldItalic.ttf in Resources */,
+				152EB9DA1DF9974800213DD5 /* GoogleService-Info.plist in Resources */,
+				15EB9B181DE62BF7002C6C76 /* FiraSans-MediumItalic.ttf in Resources */,
+				15EB9B171DE62BF7002C6C76 /* FiraSans-Medium.ttf in Resources */,
+				15EB9B191DE62BF7002C6C76 /* FiraSans-Regular.ttf in Resources */,
+				15EB9B141DE62BF7002C6C76 /* FiraSans-Italic.ttf in Resources */,
+				15EB9B161DE62BF7002C6C76 /* FiraSans-LightItalic.ttf in Resources */,
+				159167831DE1B6840040FDD2 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1591678A1DE1B6840040FDD2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		159167951DE1B6840040FDD2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0EA3E1E9B9EE00323C3B1F26 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CommonMoney/Pods-CommonMoney-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2C2CEB7778367C33A41F82DA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CommonMoney/Pods-CommonMoney-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B02A84E66B2B965F1CECAF8A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		159167741DE1B6840040FDD2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				159167AE1DE1B6850040FDD2 /* MainViewController.swift in Sources */,
+				159167B41DE1B6850040FDD2 /* Extensions.swift in Sources */,
+				158B74911DE63EB9005306D5 /* CMBillTableViewCell.swift in Sources */,
+				1568F5E21E1672E400315659 /* LoginView.swift in Sources */,
+				159167B01DE1B6850040FDD2 /* BaseViewController.swift in Sources */,
+				159167B21DE1B6850040FDD2 /* Constans.swift in Sources */,
+				1528C5311DE60A09005DD72D /* Home.swift in Sources */,
+				15445BCA1DE1B08700681801 /* Bill.swift in Sources */,
+				15B0CD451DF350D500A7C8B4 /* AddBillViewController.swift in Sources */,
+				15445BCE1DE1B51300681801 /* Cotenant.swift in Sources */,
+				1568F5DF1E166BB400315659 /* AddBillImageView.swift in Sources */,
+				157A0B921DE61CD100C22E3F /* CMTextField.swift in Sources */,
+				159167AC1DE1B6850040FDD2 /* LoginOrRegisterViewController.swift in Sources */,
+				15EA39901E1FF59100DC48C7 /* RegisterView.swift in Sources */,
+				1591677C1DE1B6840040FDD2 /* AppDelegate.swift in Sources */,
+				15EB9B071DE629B2002C6C76 /* CMButton.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		159167881DE1B6840040FDD2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				159167911DE1B6840040FDD2 /* CommonMoneyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		159167931DE1B6840040FDD2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1591679C1DE1B6850040FDD2 /* CommonMoneyUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1591678E1DE1B6840040FDD2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 159167771DE1B6840040FDD2 /* CommonMoney */;
+			targetProxy = 1591678D1DE1B6840040FDD2 /* PBXContainerItemProxy */;
+		};
+		159167991DE1B6840040FDD2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 159167771DE1B6840040FDD2 /* CommonMoney */;
+			targetProxy = 159167981DE1B6840040FDD2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		159167841DE1B6840040FDD2 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				159167851DE1B6840040FDD2 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1591679E1DE1B6850040FDD2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1591679F1DE1B6850040FDD2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		159167A11DE1B6850040FDD2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A5ED669F9DFA1F48F0D3E42 /* Pods-CommonMoney.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2FP33MYDL3;
+				INFOPLIST_FILE = CommonMoney/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dominika.czarnecka.CommonMoney;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		159167A21DE1B6850040FDD2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D6D64C958459C303F6C34646 /* Pods-CommonMoney.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2FP33MYDL3;
+				INFOPLIST_FILE = CommonMoney/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dominika.czarnecka.CommonMoney;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		159167A41DE1B6850040FDD2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 2FP33MYDL3;
+				INFOPLIST_FILE = CommonMoneyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dominika.czarnecka.CommonMoneyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CommonMoney.app/CommonMoney";
+			};
+			name = Debug;
+		};
+		159167A51DE1B6850040FDD2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 2FP33MYDL3;
+				INFOPLIST_FILE = CommonMoneyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dominika.czarnecka.CommonMoneyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CommonMoney.app/CommonMoney";
+			};
+			name = Release;
+		};
+		159167A71DE1B6850040FDD2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 2FP33MYDL3;
+				INFOPLIST_FILE = CommonMoneyUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dominika.czarnecka.CommonMoneyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = CommonMoney;
+			};
+			name = Debug;
+		};
+		159167A81DE1B6850040FDD2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 2FP33MYDL3;
+				INFOPLIST_FILE = CommonMoneyUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dominika.czarnecka.CommonMoneyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = CommonMoney;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		159167731DE1B6840040FDD2 /* Build configuration list for PBXProject "CommonMoney" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1591679E1DE1B6850040FDD2 /* Debug */,
+				1591679F1DE1B6850040FDD2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		159167A01DE1B6850040FDD2 /* Build configuration list for PBXNativeTarget "CommonMoney" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				159167A11DE1B6850040FDD2 /* Debug */,
+				159167A21DE1B6850040FDD2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		159167A31DE1B6850040FDD2 /* Build configuration list for PBXNativeTarget "CommonMoneyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				159167A41DE1B6850040FDD2 /* Debug */,
+				159167A51DE1B6850040FDD2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		159167A61DE1B6850040FDD2 /* Build configuration list for PBXNativeTarget "CommonMoneyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				159167A71DE1B6850040FDD2 /* Debug */,
+				159167A81DE1B6850040FDD2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 159167701DE1B6840040FDD2 /* Project object */;
+}
