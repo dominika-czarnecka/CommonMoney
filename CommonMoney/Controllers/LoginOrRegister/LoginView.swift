@@ -16,7 +16,7 @@ class LoginView: UIView {
     let loginButton = CMButton()
 
     init(){
-        
+        //TODO: Login with FB
         super.init(frame: CGRect.zero)
         
         self.backgroundColor = UIColor.clear

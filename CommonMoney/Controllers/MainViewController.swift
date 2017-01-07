@@ -8,13 +8,17 @@
 
 import UIKit
 import FirebaseDatabase
+import ANDLineChartView
 
 import ObjectMapper
 
-class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, ANDLineChartViewDataSource{
     
     let ref = FIRDatabase.database().reference(withPath: "bills")
+    
     let tableView = UITableView()
+    let chartView = ANDLineChartView.init()
+    
     var bills: [Bill] = []
     
     override func viewDidLoad() {
@@ -31,26 +35,43 @@ class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         tableView.register(CMBillTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.separatorColor = UIColor.clear
         
+        //Table View
         self.view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
-        self.view.addConstraints([
-            NSLayoutConstraint.init(item: tableView, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1.0, constant: 0),
-            NSLayoutConstraint.init(item: tableView, attribute: .top, relatedBy: .equal,toItem: view, attribute: .top, multiplier: 1.0, constant: 0),
-            NSLayoutConstraint.init(item: tableView, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1.0, constant: 0),
-            NSLayoutConstraint.init(item: tableView, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 1.0, constant: 0)])
+        //Chart View
+        self.view.addSubview(chartView)
+        chartView.translatesAutoresizingMaskIntoConstraints = false
+        chartView.chartBackgroundColor = Colors.darkBlue
+        chartView.dataSource = self
+        chartView.layer.cornerRadius = 10
         
+        setupConstraints()
+        
+        //Add button
         let addButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "add"), style: .done, target: self, action: #selector(addButtonAction))
         
         self.navigationItem.rightBarButtonItem = addButtonItem
         
     }
 
-    //MARK: TableView delegate and dataSource
+    func setupConstraints(){
+        
+        self.view.addConstraints([
+            NSLayoutConstraint.init(item: chartView, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1.0, constant: 0),
+            NSLayoutConstraint.init(item: chartView, attribute: .top, relatedBy: .equal,toItem: view, attribute: .top, multiplier: 1.0, constant: 25),
+            NSLayoutConstraint.init(item: chartView, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1.0, constant: -10),
+            NSLayoutConstraint.init(item: chartView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 200)])
+        
+        self.view.addConstraints([
+            NSLayoutConstraint.init(item: tableView, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1.0, constant: 0),
+            NSLayoutConstraint.init(item: tableView, attribute: .top, relatedBy: .equal,toItem: chartView, attribute: .bottom, multiplier: 1.0, constant: 20),
+            NSLayoutConstraint.init(item: tableView, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1.0, constant: 0),
+            NSLayoutConstraint.init(item: tableView, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 1.0, constant: -215)])
+        
+    }
     
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        return UIView()
-//    }
+    //MARK: TableView Selegate and Data Source
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
@@ -75,9 +96,41 @@ class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         cell.priceLabel.text = bills[indexPath.row].price?.description
         cell.separatorView.backgroundColor = UIColor.blue
         
+        //TODO: change for ownerImage, not bill image
+        cell.ownerImage.image = bills[indexPath.row].photo?.convertBase64ToImage()
+        
         return cell
     }
 
+    
+    //MARK: Chart Data Source and Delegate methods
+    
+    func numberOfElements(in chartView: ANDLineChartView!) -> UInt {
+        return UInt(bills.count)
+    }
+    
+    func chartView(_ chartView: ANDLineChartView!, valueForElementAtRow row: UInt) -> CGFloat {
+        return bills[Int(row)].price ?? 0
+    }
+    
+    func numberOfGridIntervals(in chartView: ANDLineChartView!) -> UInt {
+        return 5
+    }
+    
+    public func chartView(_ chartView: ANDLineChartView!, descriptionForGridIntervalValue interval: CGFloat) -> String! {
+        return interval.description
+    }
+    
+    func maxValueForGridInterval(in chartView: ANDLineChartView!) -> CGFloat {
+        return 100
+    }
+    
+    func minValueForGridInterval(in chartView: ANDLineChartView!) -> CGFloat {
+        return 0
+    }
+    
+    //MARK: Others methods
+    
     func addButtonAction(){
         self.navigationController?.pushViewController(AddBillViewController(), animated: true)
     }
@@ -87,12 +140,12 @@ class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         
         ref.queryOrdered(byChild: "title").observe(.childAdded, with: { (snapshot) in
             
-            print(snapshot.debugDescription)
-            
             if let bill = Mapper<Bill>().map(JSON: snapshot.value as? [String : Any] ?? [:]) {
                 self.bills.append(bill)
+                self.tableView.reloadData()
+                self.chartView.reloadData()
             }
-            self.tableView.reloadData()
+
         })
     }
     

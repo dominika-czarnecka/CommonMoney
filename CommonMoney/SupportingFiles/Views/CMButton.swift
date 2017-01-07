@@ -13,8 +13,12 @@ class CMButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundColor = Colors.buttonBlue
+        self.backgroundColor = UIColor.white
         self.layer.cornerRadius = 15
+        self.setTitleColor(Colors.darkBlue, for: .normal)
+        
+        self.layer.borderWidth = 4
+        self.layer.borderColor = Colors.darkBlue.cgColor
         
         self.addTarget(self, action: #selector(beginTracking), for: .touchDown)
         self.addTarget(self, action: #selector(endTracking), for: .touchUpInside)

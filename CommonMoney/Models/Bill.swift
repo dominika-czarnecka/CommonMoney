@@ -17,15 +17,17 @@ enum BillType: String{
 class Bill: Mappable {
     
     var id: String?
+    var homeID: String?
     var title: String?
     var ownerId: String?
     var date: Double?
     var price: CGFloat?
     var type: String?//BillType?
-    var photo: UIImage?
+    var photo: String?
     
-    init(id: String, title: String, ownerId: String, date: Double, fullPrice: CGFloat, type: String, photo: UIImage?) {
+    init(id: String, homeID: String, title: String, ownerId: String, date: Double, fullPrice: CGFloat, type: String, photo: String?) {
         self.id = id
+        self.homeID = homeID
         self.title = title
         self.date = date
         self.ownerId = ownerId
@@ -43,6 +45,7 @@ class Bill: Mappable {
     
     func mapping(map: Map) {
         self.id <- map["id"]
+        self.homeID <- map["homeID"]
         self.title <- map["title"]
         self.ownerId <- map["ownerId"]
         self.price <- map["fullPrice"]

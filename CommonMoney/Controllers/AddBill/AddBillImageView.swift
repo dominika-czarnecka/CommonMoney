@@ -13,7 +13,6 @@ class AddBillImageView: UIView {
     let titleLabel = UILabel()
     let separatorView = UIView()
     let imageButton = UIButton.init()
-    var billImage = UIImageView()
     
     init() {
        
@@ -33,14 +32,13 @@ class AddBillImageView: UIView {
         separatorView.translatesAutoresizingMaskIntoConstraints = false
         separatorView.backgroundColor = Colors.buttonBlue
         
+        //TODO: Use cocoa to scan ractangue https://github.com/mukyasa/MMCamScanner
         self.addSubview(imageButton)
         imageButton.translatesAutoresizingMaskIntoConstraints = false
         imageButton.setImage(#imageLiteral(resourceName: "add"), for: .normal)
         imageButton.tintColor = Colors.buttonBlue
-        
-        self.addSubview(billImage)
-        billImage.contentMode = .scaleAspectFit
-        billImage.clipsToBounds = true
+        imageButton.clipsToBounds = true
+        imageButton.contentMode = .scaleAspectFit
         
         setupConstraints()
         
@@ -69,15 +67,8 @@ class AddBillImageView: UIView {
         self.addConstraints(
             [NSLayoutConstraint.init(item: imageButton, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0),
              NSLayoutConstraint.init(item: imageButton, attribute: .top, relatedBy: .equal, toItem: separatorView, attribute: .bottom, multiplier: 1.0, constant: 5),
-             NSLayoutConstraint.init(item: imageButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 30),
-             NSLayoutConstraint.init(item: imageButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: 30)
-            ])
-        
-        self.addConstraints(
-            [NSLayoutConstraint.init(item: billImage, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0),
-             NSLayoutConstraint.init(item: billImage, attribute: .top, relatedBy: .equal, toItem: imageButton, attribute: .bottom, multiplier: 1.0, constant: 5),
-             NSLayoutConstraint.init(item: billImage, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: -30),
-             NSLayoutConstraint.init(item: billImage, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 0.9, constant: 0)
+             NSLayoutConstraint.init(item: imageButton, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: -20),
+             NSLayoutConstraint.init(item: imageButton, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 0.8, constant: 0)
             ])
     }
     

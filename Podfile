@@ -9,7 +9,6 @@ def import_common_pods
   pod 'Alamofire'
   pod 'AlamofireObjectMapper'
   pod 'ObjectMapper'
-  pod 'SDWebImage'
   pod 'KVNProgress'
   pod 'MMDrawerController'
   pod 'KeychainAccess'
@@ -20,6 +19,7 @@ def import_common_pods
 	pod 'Firebase/Messaging'
 	pod 'Firebase/Auth'
 	pod 'Firebase/Database'
+  pod "ANDLineChartView"
 end
 
 target 'CommonMoney' do

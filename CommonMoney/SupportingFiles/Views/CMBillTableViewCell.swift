@@ -43,6 +43,8 @@ class CMBillTableViewCell: UITableViewCell {
         self.addSubview(ownerImage)
         ownerImage.translatesAutoresizingMaskIntoConstraints = false
         ownerImage.contentMode = .scaleAspectFit
+        ownerImage.clipsToBounds = true
+        ownerImage.layer.masksToBounds = true
         
         self.addSubview(separatorView)
         separatorView.translatesAutoresizingMaskIntoConstraints = false
@@ -61,12 +63,6 @@ class CMBillTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        
-    }
-    
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
 
             self.whiteView.backgroundColor = highlighted ? UIColor.clear : UIColor.white
@@ -76,19 +72,19 @@ class CMBillTableViewCell: UITableViewCell {
         
         self.addConstraints(
             [NSLayoutConstraint.init(item: whiteView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0),
-            NSLayoutConstraint.init(item: whiteView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0),
+            NSLayoutConstraint.init(item: whiteView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: -3),
             NSLayoutConstraint.init(item: whiteView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1.0, constant: -10),
             NSLayoutConstraint.init(item: whiteView, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1.0, constant: -10)])
         
         self.addConstraints([
             NSLayoutConstraint.init(item: ownerImage, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 5),
-            NSLayoutConstraint.init(item: ownerImage, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1.0, constant: 0),
-            NSLayoutConstraint.init(item: ownerImage, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1.0, constant: 0),
-            NSLayoutConstraint.init(item: ownerImage, attribute: .width, relatedBy: .equal, toItem: ownerImage, attribute: .height, multiplier: 1.0, constant: 0)])
+            NSLayoutConstraint.init(item: ownerImage, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1.0, constant: 8),
+            NSLayoutConstraint.init(item: ownerImage, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1.0, constant: -15),
+            NSLayoutConstraint.init(item: ownerImage, attribute: .width, relatedBy: .equal, toItem: ownerImage, attribute: .height, multiplier: 1.0, constant: -15)])
         
         self.addConstraints([
             NSLayoutConstraint.init(item: titleLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 5),
-            NSLayoutConstraint.init(item: titleLabel, attribute: .left, relatedBy: .equal, toItem: ownerImage, attribute: .right, multiplier: 1.0, constant: 0),
+            NSLayoutConstraint.init(item: titleLabel, attribute: .left, relatedBy: .equal, toItem: ownerImage, attribute: .right, multiplier: 1.0, constant: 5),
             NSLayoutConstraint.init(item: titleLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 15),
             NSLayoutConstraint.init(item: titleLabel, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 0.5, constant: 0)])
         

@@ -1,15 +1,15 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "D14DF940883203C7646A958ED485AFE4C470EA97",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "3ABFC1F0A9F647FB285DA3C0DF7C455379F86875",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "D14DF940883203C7646A958ED485AFE4C470EA97" : 9223372036854775807,
+    "3ABFC1F0A9F647FB285DA3C0DF7C455379F86875" : 9223372036854775807,
     "887A9894F4CE563730B571871C62F5604C2DB835" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "02EC8653-4A3F-474C-A756-0CBC5943366A",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "D14DF940883203C7646A958ED485AFE4C470EA97" : "CommonMoney\/",
+    "3ABFC1F0A9F647FB285DA3C0DF7C455379F86875" : "CommonMoney\/",
     "887A9894F4CE563730B571871C62F5604C2DB835" : "CommonMoney\/CommonMoney\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "CommonMoney",
@@ -19,12 +19,12 @@
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/dominika-czarnecka\/CommonMoney.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "887A9894F4CE563730B571871C62F5604C2DB835"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3ABFC1F0A9F647FB285DA3C0DF7C455379F86875"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/dominika-czarnecka\/CommonMoney.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D14DF940883203C7646A958ED485AFE4C470EA97"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "887A9894F4CE563730B571871C62F5604C2DB835"
     }
   ]
 }

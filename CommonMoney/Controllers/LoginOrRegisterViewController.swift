@@ -44,12 +44,11 @@ class LoginOrRegisterViewController: BaseViewController, UIScrollViewDelegate {
         scrollView.delegate = self
         scrollView.isPagingEnabled = true
         scrollView.showsVerticalScrollIndicator = false
-        scrollView.alwaysBounceVertical = false
         
         let viewWidth = UIScreen.main.bounds.width
         let viewHeight = UIScreen.main.bounds.height
         
-        scrollView.contentSize = CGSize.init(width: viewWidth * 3, height: viewHeight)
+        scrollView.contentSize = CGSize.init(width: viewWidth * 3, height: 0)
         
         loginView.frame = CGRect.init(x: 0, y: 0, width: viewWidth, height: viewHeight)
         registerView.frame = CGRect.init(x: viewWidth, y: 0, width: viewWidth, height: viewHeight)
@@ -61,6 +60,7 @@ class LoginOrRegisterViewController: BaseViewController, UIScrollViewDelegate {
         loginView.translatesAutoresizingMaskIntoConstraints = false
         loginView.loginLabel.text = "Log in or swipe your finger to left to sing up"
         loginView.loginButton.setTitle("Login", for: .normal)
+        loginView.loginButton.titleLabel?.font = UIFont.appFont(bold: true, fontSize: 14)
         loginView.loginButton.addTarget(self, action: #selector(loginButtonAction), for: .touchUpInside)
 
         //MARK: RegisterView

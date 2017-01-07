@@ -92,3 +92,37 @@ extension Date {
     
 }
 
+extension UIImage{
+    
+    func toBase64(quality: CGFloat) -> String{
+        
+        let data = UIImageJPEGRepresentation(self, quality)
+        let string = (data?.base64EncodedString(options: NSData.Base64EncodingOptions.endLineWithLineFeed))!
+
+        return string
+
+    }
+    // convert images into base64 and keep them into string
+    
+}
+
+extension String{
+    func convertBase64ToImage() -> UIImage {
+        
+        let decodedData = NSData(base64Encoded: self, options: NSData.Base64DecodingOptions(rawValue: 0) )
+        
+        guard decodedData != nil else {
+            return UIImage()
+        }
+        
+        let decodedimage = UIImage(data: decodedData! as Data)
+        
+        guard decodedimage != nil else {
+            return UIImage()
+        }
+        
+        return decodedimage!
+        
+    }
+}
+

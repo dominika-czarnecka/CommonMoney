@@ -2,8 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCameraUsageDescription</key>
+	<string>You can make a photo of your bill</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>string</string>
+	<string>You can choose photo of bill from your photo library</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>FiraSans-Bold.ttf</string>
