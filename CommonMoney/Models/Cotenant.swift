@@ -11,14 +11,15 @@ import ObjectMapper
 
 class Cotenant: Mappable {
     
-    var id: Int?
+    var id: String?
     var login: String?
     var firstName: String?
     var lastName: String?
-    var homeId: Int?
+    var homeId: String?
     var isAdmin: Bool?
     
-    init(login: String, firstName: String, lastName: String, homeId: Int?, isAdmin: Bool?) {
+    init(id: String, login: String, firstName: String, lastName: String, homeId: String?, isAdmin: Bool?) {
+        self.id = id
         self.login = login
         self.firstName = firstName
         self.lastName = lastName
@@ -34,6 +35,7 @@ class Cotenant: Mappable {
     }
     
     func mapping(map: Map) {
+        self.id <- map["id"]
         self.login <- map["login"]
         self.firstName <-  map["firstName"]
         self.lastName <- map["lastName"]

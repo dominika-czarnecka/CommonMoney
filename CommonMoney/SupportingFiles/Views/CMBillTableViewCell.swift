@@ -77,10 +77,10 @@ class CMBillTableViewCell: UITableViewCell {
             NSLayoutConstraint.init(item: whiteView, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1.0, constant: -10)])
         
         self.addConstraints([
-            NSLayoutConstraint.init(item: ownerImage, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 5),
-            NSLayoutConstraint.init(item: ownerImage, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1.0, constant: 8),
-            NSLayoutConstraint.init(item: ownerImage, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1.0, constant: -15),
-            NSLayoutConstraint.init(item: ownerImage, attribute: .width, relatedBy: .equal, toItem: ownerImage, attribute: .height, multiplier: 1.0, constant: -15)])
+            NSLayoutConstraint.init(item: ownerImage, attribute: .centerY, relatedBy: .equal, toItem: whiteView, attribute: .centerY, multiplier: 1.0, constant: 0),
+            NSLayoutConstraint.init(item: ownerImage, attribute: .left, relatedBy: .equal, toItem: whiteView, attribute: .left, multiplier: 1.0, constant: 4),
+            NSLayoutConstraint.init(item: ownerImage, attribute: .height, relatedBy: .equal, toItem: whiteView, attribute: .height, multiplier: 1.0, constant: -6),
+            NSLayoutConstraint.init(item: ownerImage, attribute: .width, relatedBy: .equal, toItem: ownerImage, attribute: .height, multiplier: 1.0, constant: 0)])
         
         self.addConstraints([
             NSLayoutConstraint.init(item: titleLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 5),

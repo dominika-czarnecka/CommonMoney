@@ -9,21 +9,22 @@
 import UIKit
 import FirebaseAuth
 import Firebase
+import KVNProgress
+import ObjectMapper
 
 class LoginOrRegisterViewController: BaseViewController, UIScrollViewDelegate {
     
     let ref = FIRDatabase.database().reference(withPath: "users")
+    let refHome = FIRDatabase.database().reference(withPath: "homes")
     
     var cotenants: [Cotenant]?
     var bills: [Bill]?
-    var homes: [Home]?
+    var homeID: String = ""
     
     let scrollView = UIScrollView()
     
     let loginView = LoginView()
     let registerView = RegisterView()
-    
-    //TODO: RegisterHomeView
     
     let createHomeView = UIView()
     let homeIdTextField = CMTextField(type: "Home Id")
@@ -56,13 +57,13 @@ class LoginOrRegisterViewController: BaseViewController, UIScrollViewDelegate {
         
         //MARK: LoginView
         scrollView.addSubview(loginView)
-
+        
         loginView.translatesAutoresizingMaskIntoConstraints = false
         loginView.loginLabel.text = "Log in or swipe your finger to left to sing up"
         loginView.loginButton.setTitle("Login", for: .normal)
         loginView.loginButton.titleLabel?.font = UIFont.appFont(bold: true, fontSize: 14)
         loginView.loginButton.addTarget(self, action: #selector(loginButtonAction), for: .touchUpInside)
-
+        
         //MARK: RegisterView
         scrollView.addSubview(registerView)
         registerView.backgroundColor = UIColor.clear
@@ -103,7 +104,7 @@ class LoginOrRegisterViewController: BaseViewController, UIScrollViewDelegate {
             NSLayoutConstraint.init(item: loginView, attribute: .centerY, relatedBy: .equal, toItem: self.scrollView, attribute: .centerY, multiplier: 1.0, constant: 0),
             NSLayoutConstraint.init(item: loginView, attribute: .height, relatedBy: .equal, toItem: self.scrollView, attribute: .height, multiplier: 1.0, constant: 0),
             NSLayoutConstraint.init(item: loginView, attribute: .width, relatedBy: .equal, toItem: self.scrollView, attribute: .width, multiplier: 1.0, constant: 0)])
-       
+        
         self.scrollView.addConstraints([
             NSLayoutConstraint.init(item: registerView, attribute: .left, relatedBy: .equal, toItem: self.loginView, attribute: .right, multiplier: 1.0, constant: 0),
             NSLayoutConstraint.init(item: registerView, attribute: .centerY, relatedBy: .equal, toItem: self.scrollView, attribute: .centerY, multiplier: 1.0, constant: 0),
@@ -116,58 +117,123 @@ class LoginOrRegisterViewController: BaseViewController, UIScrollViewDelegate {
     func loginButtonAction(){
         //TODO: change before realase
         
-//        guard let email = loginView.loginTextField.titleLabel.text, let password = loginView.passwordTextField.titleLabel.text else {
-//            loginView.loginTextField.shake()
-//            loginView.passwordTextField.shake()
-//            return
-//        }
-//        
-//        FIRAuth.auth()?.signIn(withEmail: email, password: password) { ( user, error) in
-//            if let error = error {
-//                print(error.localizedDescription)
-//                self.loginView.passwordTextField.shake()
-//                self.loginView.loginTextField.shake()
-//                return
-//            }
+        //        guard let email = loginView.loginTextField.titleLabel.text, let password = loginView.passwordTextField.titleLabel.text else {
+        //            loginView.loginTextField.shake()
+        //            loginView.passwordTextField.shake()
+        //            return
+        //        }
+        //
+        //        FIRAuth.auth()?.signIn(withEmail: email, password: password) { ( user, error) in
+        //            if let error = error {
+        //                print(error.localizedDescription)
+        //                self.loginView.passwordTextField.shake()
+        //                self.loginView.loginTextField.shake()
+        //                return
+        //            }
         
-                FIRAuth.auth()?.signIn(withEmail: "dominika@gmail.com", password: "dominika") { ( user, error) in
-                    if let error = error {
-                        print(error.localizedDescription)
-                        self.loginView.passwordTextField.shake()
-                        self.loginView.loginTextField.shake()
+        FIRAuth.auth()?.signIn(withEmail: "dominika@gmail.com", password: "dominika") { ( user, error) in
+            
+            if let error = error {
+                print(error.localizedDescription)
+                self.loginView.passwordTextField.shake()
+                self.loginView.loginTextField.shake()
+                return
+            }
+            
+            self.ref.queryOrdered(byChild: "id").observe(.childAdded, with: { (snapshot) in
+                
+                if let owner = Mapper<Cotenant>().map(JSON: snapshot.value as? [String : Any] ?? [:]) {
+                    
+                    if owner.login == user?.email{
+                        
+                        UserDefaults.standard.set(owner.homeId, forKey: "thisHomeID")
+                        UserDefaults.standard.set(owner.id, forKey: "thisContenant")
+                        self.navigationController?.pushViewController(MainViewController(), animated: true)
                         return
                     }
-        
-            self.navigationController?.pushViewController(MainViewController(), animated: true)
+                }
+            })
         }
     }
     
     func registrationButtonAction(){
         
-        guard let email = registerView.regLoginTextField.titleLabel.text, let password = registerView.regPasswordTextField.titleLabel.text, let firstName = registerView.regFirstNameTextField.titleLabel.text, let lastName = registerView.regLastNameTextField.titleLabel.text else {
+        guard let email = registerView.regLoginTextField.titleLabel.text,
+            let password = registerView.regPasswordTextField.titleLabel.text,
+            let firstName = registerView.regFirstNameTextField.titleLabel.text,
+            let lastName = registerView.regLastNameTextField.titleLabel.text else{
+                
+                return
+        }
+        
+        guard registerView.regLoginTextField.isValid(withPattern: "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$") && registerView.regPasswordTextField.isValid(withPattern: "^.{6,}$") && registerView.regFirstNameTextField.isValid(withPattern: "^.+$")  && registerView.regLastNameTextField.isValid(withPattern: "^.+$") else{
             return
         }
-
-        if registerView.regLoginTextField.isValid(withPattern: "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$") && registerView.regPasswordTextField.isValid(withPattern: "^.{6,}$"){
+        
+        if registerView.regHomeTextField.titleLabel.text == ""{
+            
+            let homeRegisterAlert = UIAlertController.init(title: "Home register", message: "You haven't entered homeID, would you like to register a new home?", preferredStyle: .alert)
+            
+            homeRegisterAlert.addAction(UIAlertAction.init(title: "Yes", style: .default, handler: { (_) in
+                
+                let newHomeRef = self.refHome
+                    .childByAutoId()
+                
+                self.homeID = newHomeRef.key
+                
+                UserDefaults.standard.set(self.homeID, forKey: "thisHomeID")
+                
+                let home = Home.init(id: self.homeID)
+                
+                newHomeRef.setValue(home.toJSON())
+                
+                KVNProgress.showSuccess(withStatus: "Home registred")
+                
+                FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                        return
+                    }
+                }
+                
+                let newCotenantRef = self.ref.childByAutoId()
+                
+                let cotenantID: String = newCotenantRef.key
+                
+                UserDefaults.standard.set(cotenantID, forKey: "thisContenant")
+                
+                let cotenant = Cotenant.init(id: cotenantID, login: email, firstName: firstName, lastName: lastName, homeId: self.homeID, isAdmin: true)
+                
+                newCotenantRef.setValue(cotenant.toJSON())
+                
+                self.navigationController?.pushViewController(MainViewController(), animated: true)
+                
+            }))
+            
+            homeRegisterAlert.addAction(UIAlertAction.init(title: "No", style: .cancel, handler: nil))
+            
+            self.present(homeRegisterAlert, animated: true, completion: nil)
+            
+        }else{
+            
+            FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+            }
+            
+            let newCotenantRef = self.ref.childByAutoId()
+            
+            let cotenantID = newCotenantRef.key
+            
+            let cotenant = Cotenant.init(id: cotenantID, login: email, firstName: firstName, lastName: lastName, homeId: self.homeID, isAdmin: false)
+            
+            newCotenantRef.setValue(cotenant.toJSON())
+            
+            self.navigationController?.pushViewController(MainViewController(), animated: true)
             
         }
-        
-        FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-        }
-        
-        let cotenant = Cotenant.init(login: email, firstName: firstName, lastName: lastName, homeId: nil, isAdmin: false)
-        
-        // 3
-        let cotenantItemRef = self.ref.child(email).childByAutoId()
-        
-        // 4
-        cotenantItemRef.setValue(cotenant.toJSON())
-        
-        self.navigationController?.pushViewController(MainViewController(), animated: true)
         
     }
     
@@ -182,8 +248,6 @@ class LoginOrRegisterViewController: BaseViewController, UIScrollViewDelegate {
         
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue{
             self.view.transform = CGAffineTransform.init(translationX: 0, y: -keyboardSize.height * 0.5)
-            
-//            self.scrollView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
             
         }
     }

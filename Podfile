@@ -19,7 +19,7 @@ def import_common_pods
 	pod 'Firebase/Messaging'
 	pod 'Firebase/Auth'
 	pod 'Firebase/Database'
-  pod "ANDLineChartView"
+  pod 'Charts'
 end
 
 target 'CommonMoney' do

@@ -14,6 +14,9 @@ class AddBillViewController: BaseViewController, UIImagePickerControllerDelegate
 
     let ref = FIRDatabase.database().reference(withPath: "bills")
     
+    let homeID: String = UserDefaults.standard.object(forKey: "thisHomeID") as! String
+    let cotenantID: String = UserDefaults.standard.object(forKey: "thisContenant") as! String
+    
     let scrollView = UIScrollView()
     
     let titleTextField = CMTextField(type: "Title?")
@@ -174,17 +177,15 @@ class AddBillViewController: BaseViewController, UIImagePickerControllerDelegate
             .childByAutoId()
         
         let newBillId = newBillRef.key
-        //TODO: change homeID
-        let bill = Bill.init(id: newBillId, homeID: "homeID", title: title, ownerId: "12345", date: dateFormatter.date(from: date)!.timeIntervalSince1970, fullPrice: CGFloat(NSString(string: price).floatValue), type: type, photo: imageView.imageButton.image(for: .normal)?.toBase64(quality: 0.4))
+
+        let photo = imageView.imageButton.image(for: .normal) != #imageLiteral(resourceName: "add") ? imageView.imageButton.image(for: .normal)?.toBase64(quality: 0.4) : nil
+        
+        let bill = Bill.init(id: newBillId, homeID: self.homeID, title: title, ownerId: self.cotenantID, date: dateFormatter.date(from: date)!.timeIntervalSince1970, fullPrice: CGFloat(NSString(string: price).floatValue), type: type, photo: photo)
 
         // 4
         newBillRef .setValue(bill.toJSON())
         
         KVNProgress.showSuccess(withStatus: "Bill added")
-        
-//        let alert = UIAlertController.init(title: "Adding bill", message: "Bill has been added", preferredStyle: .alert)
-//        alert.addAction(UIAlertAction.init(title: "Ok", style: .cancel, handler: nil))
-//        self.present(alert, animated: true, completion: nil)
         
     }
     

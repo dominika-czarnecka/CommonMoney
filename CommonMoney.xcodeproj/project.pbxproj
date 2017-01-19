@@ -14,8 +14,8 @@
 		1568F5DF1E166BB400315659 /* AddBillImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1568F5DE1E166BB400315659 /* AddBillImageView.swift */; };
 		1568F5E21E1672E400315659 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1568F5E11E1672E400315659 /* LoginView.swift */; };
 		157A0B921DE61CD100C22E3F /* CMTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157A0B911DE61CD100C22E3F /* CMTextField.swift */; };
-		157EF6341E216A3900B0DC84 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157EF6331E216A3900B0DC84 /* ChartView.swift */; };
 		158B74911DE63EB9005306D5 /* CMBillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158B74901DE63EB9005306D5 /* CMBillTableViewCell.swift */; };
+		158D42581E2F8F09003C356D /* BillDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158D42571E2F8F09003C356D /* BillDetailsViewController.swift */; };
 		1591677C1DE1B6840040FDD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1591677B1DE1B6840040FDD2 /* AppDelegate.swift */; };
 		159167831DE1B6840040FDD2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 159167821DE1B6840040FDD2 /* Assets.xcassets */; };
 		159167861DE1B6840040FDD2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 159167841DE1B6840040FDD2 /* LaunchScreen.storyboard */; };
@@ -66,8 +66,8 @@
 		1568F5DE1E166BB400315659 /* AddBillImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddBillImageView.swift; path = Controllers/AddBill/AddBillImageView.swift; sourceTree = "<group>"; };
 		1568F5E11E1672E400315659 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = Controllers/LoginOrRegister/LoginView.swift; sourceTree = "<group>"; };
 		157A0B911DE61CD100C22E3F /* CMTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CMTextField.swift; path = SupportingFiles/Views/CMTextField.swift; sourceTree = "<group>"; };
-		157EF6331E216A3900B0DC84 /* ChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartView.swift; path = Controllers/Main/ChartView.swift; sourceTree = "<group>"; };
 		158B74901DE63EB9005306D5 /* CMBillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CMBillTableViewCell.swift; path = SupportingFiles/Views/CMBillTableViewCell.swift; sourceTree = "<group>"; };
+		158D42571E2F8F09003C356D /* BillDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BillDetailsViewController.swift; path = Controllers/BillDetails/BillDetailsViewController.swift; sourceTree = "<group>"; };
 		159167781DE1B6840040FDD2 /* CommonMoney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CommonMoney.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1591677B1DE1B6840040FDD2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		159167821DE1B6840040FDD2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -160,10 +160,17 @@
 			isa = PBXGroup;
 			children = (
 				159167AD1DE1B6850040FDD2 /* MainViewController.swift */,
-				157EF6331E216A3900B0DC84 /* ChartView.swift */,
 				158B74901DE63EB9005306D5 /* CMBillTableViewCell.swift */,
 			);
 			name = Main;
+			sourceTree = "<group>";
+		};
+		158D42561E2F8ED7003C356D /* BillDetails */ = {
+			isa = PBXGroup;
+			children = (
+				158D42571E2F8F09003C356D /* BillDetailsViewController.swift */,
+			);
+			name = BillDetails;
 			sourceTree = "<group>";
 		};
 		1591676F1DE1B6840040FDD2 = {
@@ -224,6 +231,7 @@
 		159167A91DE1B6850040FDD2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				158D42561E2F8ED7003C356D /* BillDetails */,
 				157EF6321E216A1600B0DC84 /* Main */,
 				1568F5E01E1672BF00315659 /* LoginOrRegister */,
 				15343A641DF85D3200A25069 /* AddBill */,
@@ -498,6 +506,7 @@
 			files = (
 				159167AE1DE1B6850040FDD2 /* MainViewController.swift in Sources */,
 				159167B41DE1B6850040FDD2 /* Extensions.swift in Sources */,
+				158D42581E2F8F09003C356D /* BillDetailsViewController.swift in Sources */,
 				158B74911DE63EB9005306D5 /* CMBillTableViewCell.swift in Sources */,
 				1568F5E21E1672E400315659 /* LoginView.swift in Sources */,
 				159167B01DE1B6850040FDD2 /* BaseViewController.swift in Sources */,
@@ -506,7 +515,6 @@
 				15445BCA1DE1B08700681801 /* Bill.swift in Sources */,
 				15B0CD451DF350D500A7C8B4 /* AddBillViewController.swift in Sources */,
 				15445BCE1DE1B51300681801 /* Cotenant.swift in Sources */,
-				157EF6341E216A3900B0DC84 /* ChartView.swift in Sources */,
 				1568F5DF1E166BB400315659 /* AddBillImageView.swift in Sources */,
 				157A0B921DE61CD100C22E3F /* CMTextField.swift in Sources */,
 				159167AC1DE1B6850040FDD2 /* LoginOrRegisterViewController.swift in Sources */,

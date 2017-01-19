@@ -11,12 +11,14 @@ import ObjectMapper
 
 class Home: Mappable{
 
-    var id: Int?
-    var cotenants: [Cotenant]?
-    var bills: [Bill]?
+    var id: String?
+    var budget: Float?
+    var budgetDate: Double?
 
-    init(cotenants: [Cotenant]){
-        self.cotenants = cotenants
+    init(id: String){
+        self.id = id
+        self.budget = 0
+        self.budgetDate = Date().timeIntervalSince1970
     }
     
     /// This function can be used to validate JSON prior to mapping. Return nil to cancel mapping at this point
@@ -28,8 +30,5 @@ class Home: Mappable{
     
     func mapping(map: Map){
         self.id <- map["id"]
-        self.cotenants <- map["cotenants"]
-        self.bills <- map["bills"]
     }
-    
 }
