@@ -15,7 +15,9 @@ class CMTextField: UIView, UITextFieldDelegate{
     let separatorView = UIView()
     let typeLabel = UILabel()
     
-    init(type: String, dataPicker: Bool = false) {
+    let pickerView = UIPickerView()
+    
+    init(type: String, dataPicker: Bool = false, picker: Bool = false) {
         super.init(frame: CGRect.zero)
         
         self.backgroundColor = UIColor.white
@@ -32,8 +34,6 @@ class CMTextField: UIView, UITextFieldDelegate{
         typeLabel.textAlignment = .center
         typeLabel.font =  UIFont.appFont(bold: false, fontSize: 12)
         typeLabel.adjustsFontSizeToFitWidth = true
-//        typeLabel.numberOfLines = 0
-//        typeLabel.lineBreakMode = .byWordWrapping
         
         self.clipsToBounds = true
 
@@ -51,6 +51,10 @@ class CMTextField: UIView, UITextFieldDelegate{
             picker.addTarget(self, action: #selector(dateDidChange), for: .valueChanged)
             titleLabel.inputView = picker
             titleLabel.delegate = self
+        }
+        
+        if picker{
+            titleLabel.inputView = pickerView
         }
         
         self.titleLabel.autocapitalizationType = UITextAutocapitalizationType.none

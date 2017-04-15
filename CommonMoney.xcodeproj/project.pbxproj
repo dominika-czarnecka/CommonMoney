@@ -38,6 +38,7 @@
 		15EB9B181DE62BF7002C6C76 /* FiraSans-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15EB9B0F1DE62BF7002C6C76 /* FiraSans-MediumItalic.ttf */; };
 		15EB9B191DE62BF7002C6C76 /* FiraSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15EB9B101DE62BF7002C6C76 /* FiraSans-Regular.ttf */; };
 		15EB9B1A1DE62BF7002C6C76 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 15EB9B111DE62BF7002C6C76 /* OFL.txt */; };
+		15F893D01E3693A4003118CF /* RightMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F893CF1E3693A4003118CF /* RightMenuViewController.swift */; };
 		2909D98CB819F84E03B0EB75 /* Pods_CommonMoney.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08B923D5DBBE6114A3B442C /* Pods_CommonMoney.framework */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +97,7 @@
 		15EB9B0F1DE62BF7002C6C76 /* FiraSans-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSans-MediumItalic.ttf"; sourceTree = "<group>"; };
 		15EB9B101DE62BF7002C6C76 /* FiraSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSans-Regular.ttf"; sourceTree = "<group>"; };
 		15EB9B111DE62BF7002C6C76 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
+		15F893CF1E3693A4003118CF /* RightMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RightMenuViewController.swift; path = Controllers/Main/RightMenuViewController.swift; sourceTree = "<group>"; };
 		8A5ED669F9DFA1F48F0D3E42 /* Pods-CommonMoney.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CommonMoney.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CommonMoney/Pods-CommonMoney.debug.xcconfig"; sourceTree = "<group>"; };
 		D6D64C958459C303F6C34646 /* Pods-CommonMoney.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CommonMoney.release.xcconfig"; path = "Pods/Target Support Files/Pods-CommonMoney/Pods-CommonMoney.release.xcconfig"; sourceTree = "<group>"; };
 		E08B923D5DBBE6114A3B442C /* Pods_CommonMoney.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CommonMoney.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +163,7 @@
 			children = (
 				159167AD1DE1B6850040FDD2 /* MainViewController.swift */,
 				158B74901DE63EB9005306D5 /* CMBillTableViewCell.swift */,
+				15F893CF1E3693A4003118CF /* RightMenuViewController.swift */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				1528C5311DE60A09005DD72D /* Home.swift in Sources */,
 				15445BCA1DE1B08700681801 /* Bill.swift in Sources */,
 				15B0CD451DF350D500A7C8B4 /* AddBillViewController.swift in Sources */,
+				15F893D01E3693A4003118CF /* RightMenuViewController.swift in Sources */,
 				15445BCE1DE1B51300681801 /* Cotenant.swift in Sources */,
 				1568F5DF1E166BB400315659 /* AddBillImageView.swift in Sources */,
 				157A0B921DE61CD100C22E3F /* CMTextField.swift in Sources */,

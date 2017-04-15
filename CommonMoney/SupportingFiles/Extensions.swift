@@ -124,5 +124,16 @@ extension String{
         return decodedimage!
         
     }
+    
+    func stringToDate(format: String) -> Date{
+        let formatter = DateFormatter()
+        let locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        
+        formatter.locale = locale as Locale!
+        formatter.dateFormat = format
+        
+        return formatter.date(from: self) ?? Date()
+    }
+    
 }
 

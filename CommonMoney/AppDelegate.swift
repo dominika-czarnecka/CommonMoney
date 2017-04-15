@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import MMDrawerController
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,11 +22,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         
         let startVC = LoginOrRegisterViewController()
+        let rightDrawerControler =  RightMenuViewController()
+        
         let nvc = UINavigationController.init(rootViewController: startVC)
         
         nvc.navigationBar.isTranslucent = false
-
-        window?.rootViewController = nvc
+        nvc.navigationBar.tintColor = Colors.darkBlue
+//        nvc.navigationBar.backgroundColor = Colors.
+        
+        let drawerController = MMDrawerController.init(center: nvc, leftDrawerViewController: rightDrawerControler)
+        
+        guard (drawerController != nil) else{
+            return false
+        }
+        
+        drawerController?.openDrawerGestureModeMask = MMOpenDrawerGestureMode.bezelPanningCenterView
+        drawerController?.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.all
+        drawerController?.centerHiddenInteractionMode = .none
+        
+        window?.rootViewController = drawerController
         window?.makeKeyAndVisible()
         
         return true

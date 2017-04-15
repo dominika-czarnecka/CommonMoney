@@ -12,7 +12,7 @@ import ObjectMapper
 class Home: Mappable{
 
     var id: String?
-    var budget: Float?
+    var budget: Double?
     var budgetDate: Double?
 
     init(id: String){
@@ -30,5 +30,7 @@ class Home: Mappable{
     
     func mapping(map: Map){
         self.id <- map["id"]
+        self.budget <- map["budget"]
+        self.budgetDate <- map["budgetDate"]
     }
 }

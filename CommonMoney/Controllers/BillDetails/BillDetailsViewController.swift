@@ -32,12 +32,22 @@ class BillDetailsViewController: BaseViewController, UIImagePickerControllerDele
     
     init(bill: Bill, owner: Cotenant){
         
+        let user = UserDefaults.standard.object(forKey: "thisContenant") as? String
+        
         self.activityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         
         self.bill = bill
         self.owner = owner
         
         super.init()
+        
+        if owner.id == user{
+            
+            let deleteItem = UIBarButtonItem.init(title: "Delete", style: .done, target: self, action: #selector(deleteItemAction))
+            self.navigationItem.setRightBarButton(deleteItem, animated: true)
+            
+        }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -88,6 +98,29 @@ class BillDetailsViewController: BaseViewController, UIImagePickerControllerDele
         imageView.imageButton.setImage(bill?.photo?.convertBase64ToImage(), for: .normal)
         imageView.userActivity = .none
         setupConstraints()
+        
+    }
+    
+    func deleteItemAction(){
+        
+        let confirmAlert = UIAlertController.init(title: "Delete bill?", message: "Are u sure u want to delete this bill? ", preferredStyle: .alert)
+        confirmAlert.addAction(UIAlertAction.init(title: "Yes", style: .default, handler: { (UIAlertAction) in
+            
+            guard self.bill?.id != nil else{
+                return
+            }
+            
+            self.ref.child((self.bill?.id)!).removeValue { (error, ref) in
+                if error != nil {
+                    print("error \(error)")
+                }else{
+                    _ = self.navigationController?.popViewController(animated: true)
+                }
+            }
+
+        }))
+        confirmAlert.addAction(UIAlertAction.init(title: "No", style: .cancel, handler: nil))
+        self.present(confirmAlert, animated: true, completion: nil)
         
     }
     

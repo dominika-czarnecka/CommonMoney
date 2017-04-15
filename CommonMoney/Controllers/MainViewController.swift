@@ -20,17 +20,20 @@ class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     
     var bills: [Bill] = []
     var owners: [Cotenant] = []
+    var home: Home? = nil
+    var homeRef = FIRDatabase.database().reference(withPath: "homes")
     
-    var billsDates: [String] = []
-    var billsPrices: [Double] = []
+    var billsData: [String : Any] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupDatabaseObserver()
         self.navigationController?.navigationBar.isHidden = false
         self.navigationItem.setHidesBackButton(true, animated: false)
-    
-        setupDatabaseObserver()
+        self.title = "CommonyMoney"
+        
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : Colors.darkBlue]
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -48,9 +51,9 @@ class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         chartView.layer.cornerRadius = 10
         
         chartView.gridBackgroundColor = UIColor.blue
+        chartView.chartDescription?.text = ""
         
         //chartView.leftAxis.drawGridLinesEnabled = false
-        chartView.leftAxis.axisMinimum = 0
         chartView.leftAxis.drawAxisLineEnabled = true
         chartView.leftAxis.labelFont = UIFont.appFont(bold: false, fontSize: 8)
         
@@ -59,9 +62,17 @@ class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         chartView.rightAxis.drawLabelsEnabled = false
         
         //chartView.xAxis.drawGridLinesEnabled = false
-        chartView.xAxis.labelPosition = .topInside
+        chartView.xAxis.labelPosition = .bottom
+        chartView.xAxis.labelFont = UIFont.appFont(bold: false, fontSize: 6)
         chartView.xAxis.drawLabelsEnabled = false
         chartView.xAxis.drawAxisLineEnabled = false
+        
+        //Set defaults for billDates and billsPrices
+        for i in 0...30{
+            let dateToAdd = Date.init(timeIntervalSinceNow: Double(-60 * 60 * 24 * (30 - i))).dateToString(format: "dd-MM-yyyy")
+        
+            billsData[dateToAdd] = 0
+        }
         
         setupConstraints()
         
@@ -71,7 +82,7 @@ class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         self.navigationItem.rightBarButtonItem = addButtonItem
         
     }
-
+    
     func setupConstraints(){
         
         self.view.addConstraints([
@@ -127,39 +138,59 @@ class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         
         return cell
     }
-
     
     //MARK: Chart Data Source and Delegate methods
     
-    func setChart(dataPoints: [String], values: [Double]) {
-        chartView.noDataText = "No data."
+    func setChart(dictionary: [Bill]){
         
         var dataEntries: [ChartDataEntry] = []
         
-        for i in 0..<dataPoints.count {
-            let dataEntry = ChartDataEntry.init(x: Double(i), y: values[i], data: dataPoints[i] as AnyObject?)// init(x: Double(i), yValues: [values[i]], label: dataPoints[i])
+        var dict = dictionary.sorted { (value1, value2) -> Bool in
+            return value1.date ?? 0 < value2.date ?? 0
+        }
+        
+        var entries: [Float] = []
+        var e = 0
+        
+        if dict.count > 0 {
+            entries.append(dict[0].price ?? 0)
+        }else{
+            return
+        }
+        
+        for i in 1..<dict.count{
+            
+            if Date.init(timeIntervalSince1970: (dict[i-1].date ?? 0)).dateToString(format: "dd-MM-yyyy") == Date.init(timeIntervalSince1970: (dict[i].date ?? 0)).dateToString(format: "dd-MM-yyyy"){
+
+                entries[e] += dict[i].price ?? 0
+            }else{
+                entries.append(entries[e] + (dict[i].price ?? 0))
+                e += 1
+            }
+        }
+        
+        for i in 0..<entries.count{
+            let dataEntry = ChartDataEntry.init(x: Double(i), y: Double(entries[i]), data: nil)
+
             dataEntries.append(dataEntry)
         }
         
         let chartDataSet = LineChartDataSet.init(values: dataEntries, label: "Budget")
 
         chartDataSet.axisDependency = .left
-        chartDataSet.setCircleColor(Colors.darkBlue)
-        chartDataSet.setColor(Colors.darkBlue)
+        chartDataSet.setCircleColor(UIColor.white)
+        chartDataSet.setColor(UIColor.white)
         chartDataSet.lineWidth = 2.0
-        chartDataSet.circleRadius = 3.0 // the radius of the node circle
-      //  chartDataSet.fillAlpha = 65 / 255.0
+        chartDataSet.circleRadius = 3.0
         chartDataSet.highlightColor = UIColor.white
-        //chartDataSet.drawCircleHoleEnabled = true
         
         var dataSets = [LineChartDataSet]()
         dataSets.append(chartDataSet)
         
         let chartData = LineChartData.init(dataSets: dataSets)
         chartData.setValueTextColor(UIColor.white)
-        chartData.setValueFont(UIFont.appFont(bold: true, fontSize: 12))
+        chartData.setValueFont(UIFont.appFont(bold: true, fontSize: 10))
         chartView.data = chartData
-        
     }
     
     //MARK: Others methods
@@ -170,35 +201,41 @@ class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     
     func setupDatabaseObserver(){
         
-        let ref = FIRDatabase.database().reference(withPath: "bills")//.queryOrdered(byChild: "homeID").queryEqual(toValue: self.homeID)
+        self.bills = []
+        self.home = nil
+        self.owners = []
         
-        ref.queryOrdered(byChild: "id").observe(.childAdded, with: { (snapshot) in
+        homeRef.queryOrdered(byChild: "id").queryEqual(toValue: self.homeID).observe(.childAdded, with: {(Snapshot) in
             
-            if let bill = Mapper<Bill>().map(JSON: snapshot.value as? [String : Any] ?? [:]){
+            if let thisHome = Mapper<Home>().map(JSON: Snapshot.value as? [String : Any] ?? [:]) {
                 
-                guard bill.homeID == self.homeID else{
-                    return
-                }
-                
-                self.bills.append(bill)
-                self.billsDates.append(Date.init(timeIntervalSince1970: Double(bill.date ?? 0)).dateToString(format: "dd-MM-yyyy"))
-                self.billsPrices.append(Double(bill.price ?? 0))
-                
-                self.tableView.reloadData()
-                self.setChart(dataPoints: self.billsDates, values:self.billsPrices)
+                self.home = thisHome
+                self.home?.budget = 0
             }
-
+            
         })
         
-        let refOwners = FIRDatabase.database().reference(withPath: "users")//.queryOrdered(byChild: "homeID").queryEqual(toValue: self.homeID)
+        let ref = FIRDatabase.database().reference(withPath: "bills").queryOrdered(byChild: "homeID").queryEqual(toValue: self.homeID)
         
-        refOwners.queryOrdered(byChild: "id").observe(.childAdded, with: { (snapshot) in
+        ref.observe(.childAdded, with: { (snapshot) in
+            if let bill = Mapper<Bill>().map(JSON: snapshot.value as? [String : Any] ?? [:]){
+                
+                self.bills.append(bill)
+                self.bills = self.bills.sorted(by: { (Bill1, Bill2) -> Bool in
+                    return Bill1.date ?? 0 >= Bill2.date ?? 0
+                })
+                
+                self.tableView.reloadData()
+                self.setChart(dictionary: self.bills)
+                
+            }
+        })
+        
+        let refOwners = FIRDatabase.database().reference(withPath: "users").queryOrdered(byChild: "homeId").queryEqual(toValue: self.homeID)
+        
+        refOwners.observe(.childAdded, with: { (snapshot) in
             
             if let owner = Mapper<Cotenant>().map(JSON: snapshot.value as? [String : Any] ?? [:]) {
-                
-                guard owner.homeId == self.homeID else{
-                    return
-                }
                 
                 self.owners.append(owner)
             }

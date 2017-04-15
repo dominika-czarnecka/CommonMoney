@@ -21,11 +21,11 @@ class Bill: Mappable {
     var title: String?
     var ownerId: String?
     var date: Double?
-    var price: CGFloat?
+    var price: Float?
     var type: String?//BillType?
     var photo: String?
     
-    init(id: String, homeID: String, title: String, ownerId: String, date: Double, fullPrice: CGFloat, type: String, photo: String?) {
+    init(id: String, homeID: String, title: String, ownerId: String, date: Double, fullPrice: Float, type: String, photo: String?) {
         self.id = id
         self.homeID = homeID
         self.title = title

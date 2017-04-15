@@ -10,7 +10,7 @@ import UIKit
 import FirebaseDatabase
 import KVNProgress
 
-class AddBillViewController: BaseViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class AddBillViewController: BaseViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
 
     let ref = FIRDatabase.database().reference(withPath: "bills")
     
@@ -20,7 +20,7 @@ class AddBillViewController: BaseViewController, UIImagePickerControllerDelegate
     let scrollView = UIScrollView()
     
     let titleTextField = CMTextField(type: "Title?")
-    let typeTextField = CMTextField(type: "What?")
+    let typeTextField = CMTextField(type: "What?", picker: true)
     let priceTextField = CMTextField(type: "How much?")
     let dateTextField = CMTextField(type: "Date?", dataPicker: true)
     let imageView = AddBillImageView()
@@ -28,6 +28,8 @@ class AddBillViewController: BaseViewController, UIImagePickerControllerDelegate
     var imageHeightContraint: NSLayoutConstraint? = nil
     
     var activityIndicatorView: UIActivityIndicatorView
+    
+    let pickerOptions = ["Food", "Cleaning agents", "Charges", "Income", "Others"]
     
     override init(){
         
@@ -57,7 +59,7 @@ class AddBillViewController: BaseViewController, UIImagePickerControllerDelegate
         
         self.scrollView.addSubview(typeTextField)
         typeTextField.translatesAutoresizingMaskIntoConstraints = false
-        typeTextField.titleLabel.placeholder = "type temperary textField"
+        typeTextField.pickerView.delegate = self
         
         self.scrollView.addSubview(priceTextField)
         priceTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -157,6 +159,23 @@ class AddBillViewController: BaseViewController, UIImagePickerControllerDelegate
 
     }
     
+    //MARK: PickerViewDelegate
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerOptions.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerOptions[row]
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        typeTextField.titleLabel.text = pickerOptions[row]
+    }
+    
     func doneItemAction(){
         
         let dateFormatter = DateFormatter.init()
@@ -168,7 +187,6 @@ class AddBillViewController: BaseViewController, UIImagePickerControllerDelegate
         let date = dateTextField.titleLabel.text!
         
         guard titleTextField.isValid(withPattern: "^.+$"), typeTextField.isValid(withPattern: "^.+$"), priceTextField.isValid(withPattern: "^.+$"), dateTextField.isValid(withPattern: "^.+$") else{
-            
             return
         }
         
@@ -180,12 +198,13 @@ class AddBillViewController: BaseViewController, UIImagePickerControllerDelegate
 
         let photo = imageView.imageButton.image(for: .normal) != #imageLiteral(resourceName: "add") ? imageView.imageButton.image(for: .normal)?.toBase64(quality: 0.4) : nil
         
-        let bill = Bill.init(id: newBillId, homeID: self.homeID, title: title, ownerId: self.cotenantID, date: dateFormatter.date(from: date)!.timeIntervalSince1970, fullPrice: CGFloat(NSString(string: price).floatValue), type: type, photo: photo)
+        let bill = Bill.init(id: newBillId, homeID: self.homeID, title: title, ownerId: self.cotenantID, date: dateFormatter.date(from: date)!.timeIntervalSince1970, fullPrice: type == "Income" ? Float(NSString(string: price).floatValue) : -Float(NSString(string: price).floatValue), type: type, photo: photo)
 
         // 4
         newBillRef .setValue(bill.toJSON())
         
         KVNProgress.showSuccess(withStatus: "Bill added")
+        _ = self.navigationController?.popViewController(animated: true)
         
     }
     

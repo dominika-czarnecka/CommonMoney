@@ -83,7 +83,6 @@ class LoginOrRegisterViewController: BaseViewController, UIScrollViewDelegate {
         homeCotenants.translatesAutoresizingMaskIntoConstraints = false
         
         setupConstants()
-        
     }
     
     deinit{
@@ -148,6 +147,8 @@ class LoginOrRegisterViewController: BaseViewController, UIScrollViewDelegate {
                         
                         UserDefaults.standard.set(owner.homeId, forKey: "thisHomeID")
                         UserDefaults.standard.set(owner.id, forKey: "thisContenant")
+                        UserDefaults.standard.set(owner.firstName, forKey: "thisContenantFirstName")
+                        UserDefaults.standard.set(owner.lastName, forKey: "thisContenantLastName")
                         self.navigationController?.pushViewController(MainViewController(), animated: true)
                         return
                     }
