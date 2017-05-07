@@ -15,10 +15,10 @@ class CMButton: UIButton {
         
         self.backgroundColor = UIColor.white
         self.layer.cornerRadius = 15
-        self.setTitleColor(Colors.darkBlue, for: .normal)
+        self.setTitleColor(Constants.Colors.purple, for: .normal)
         
         self.layer.borderWidth = 4
-        self.layer.borderColor = Colors.darkBlue.cgColor
+        self.layer.borderColor = Constants.Colors.purple.cgColor
         
         self.addTarget(self, action: #selector(beginTracking), for: .touchDown)
         self.addTarget(self, action: #selector(endTracking), for: .touchUpInside)

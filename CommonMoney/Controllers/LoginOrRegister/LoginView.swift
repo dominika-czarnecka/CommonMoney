@@ -52,8 +52,8 @@ class LoginView: UIView {
         self.addConstraints([
             NSLayoutConstraint.init(item: passwordTextField, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0),
             NSLayoutConstraint.init(item: passwordTextField, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 50),
-            NSLayoutConstraint.init(item: passwordTextField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: Size.CMTextFieldSize.height),
-            NSLayoutConstraint.init(item: passwordTextField, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: Size.CMTextFieldSize.width)])
+            NSLayoutConstraint.init(item: passwordTextField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: Constants.Size.CMTextFieldSize.height),
+            NSLayoutConstraint.init(item: passwordTextField, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: Constants.Size.CMTextFieldSize.width)])
         
         self.addConstraints([
             NSLayoutConstraint.init(item: loginTextField, attribute: .centerX, relatedBy: .equal, toItem: self.passwordTextField, attribute: .centerX, multiplier: 1.0, constant: 0),
@@ -71,7 +71,7 @@ class LoginView: UIView {
             NSLayoutConstraint.init(item: loginLabel, attribute: .centerX, relatedBy: .equal, toItem: self.passwordTextField, attribute: .centerX, multiplier: 1.0, constant: 0),
             NSLayoutConstraint.init(item: loginLabel, attribute: .bottom, relatedBy: .equal, toItem: self.loginTextField, attribute: .top, multiplier: 1.0, constant: -30),
             NSLayoutConstraint.init(item: loginLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 100),
-            NSLayoutConstraint.init(item: loginLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: Size.CMTextFieldSize.width)])
+            NSLayoutConstraint.init(item: loginLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: Constants.Size.CMTextFieldSize.width)])
     }
     
 }

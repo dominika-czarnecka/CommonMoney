@@ -101,9 +101,9 @@ class CMBillTableViewCell: UITableViewCell {
             NSLayoutConstraint.init(item: priceLabel, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 0.15, constant: 0)])
         
         self.addConstraints([
-            NSLayoutConstraint.init(item: separatorView, attribute: .centerY, relatedBy: .equal, toItem: titleLabel, attribute: .centerY, multiplier: 1.0, constant: -5),
+            NSLayoutConstraint.init(item: separatorView, attribute: .centerY, relatedBy: .equal, toItem: titleLabel, attribute: .centerY, multiplier: 1.0, constant: -7),
             NSLayoutConstraint.init(item: separatorView, attribute: .right, relatedBy: .equal, toItem: priceLabel, attribute: .left, multiplier: 1.0, constant: -5),
-            NSLayoutConstraint.init(item: separatorView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0.7, constant: 0),
+            NSLayoutConstraint.init(item: separatorView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0.7, constant: -2),
             NSLayoutConstraint.init(item: separatorView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 0.2, constant: 1)])
     }
 

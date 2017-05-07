@@ -12,15 +12,14 @@ import FirebaseDatabase
 class RightMenuViewController: UIViewController {
 
     //let imageButton = UIButton()
-    
+
     let userTextField = CMTextField.init(type: "User")
     let homeTextField = CMTextField.init(type: "HomeID")
     
     let logoutButton = CMButton()
     let deleteAccount = CMButton()
     
-    let firstName = UserDefaults.standard.object( forKey: "thisContenantFirstName") as? String ?? ""
-    let lastName = UserDefaults.standard.object( forKey: "thisContenantLastName") as? String ?? ""
+    let cotenant = Constants.thisCotentant
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +28,11 @@ class RightMenuViewController: UIViewController {
         
         self.view.addSubview(userTextField)
         userTextField.translatesAutoresizingMaskIntoConstraints = false
+        userTextField.isUserInteractionEnabled = false
         
         self.view.addSubview(homeTextField)
         homeTextField.translatesAutoresizingMaskIntoConstraints = false
+        homeTextField.isUserInteractionEnabled = false
         
         self.view.addSubview(logoutButton)
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
@@ -48,9 +49,9 @@ class RightMenuViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.userTextField.titleLabel.text = self.firstName + " " + self.lastName
+        self.userTextField.titleLabel.text = (self.cotenant?.firstName ?? "") + " " + (self.cotenant?.lastName ?? "")
         
-        self.homeTextField.titleLabel.text = UserDefaults.standard.object(forKey: "thisHomeID") as? String ?? ""
+        self.homeTextField.titleLabel.text = self.cotenant?.homeId
         
     }
 
@@ -59,19 +60,19 @@ class RightMenuViewController: UIViewController {
         self.view.addConstraints([
             NSLayoutConstraint.init(item: userTextField, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0),
             NSLayoutConstraint.init(item: userTextField, attribute: .top, relatedBy: .equal,toItem: view, attribute: .top, multiplier: 1.0, constant: 230),
-            NSLayoutConstraint.init(item: userTextField, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant:Size.CMTextFieldSize.width),
+            NSLayoutConstraint.init(item: userTextField, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant:200 ),
             NSLayoutConstraint.init(item: userTextField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 40)])
         
         self.view.addConstraints([
             NSLayoutConstraint.init(item: homeTextField, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0),
             NSLayoutConstraint.init(item: homeTextField, attribute: .top, relatedBy: .equal,toItem: userTextField, attribute: .bottom, multiplier: 1.0, constant: 10),
-            NSLayoutConstraint.init(item: homeTextField, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant:Size.CMTextFieldSize.width),
+            NSLayoutConstraint.init(item: homeTextField, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant:200),
             NSLayoutConstraint.init(item: homeTextField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 40)])
         
         self.view.addConstraints([
             NSLayoutConstraint.init(item: logoutButton, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0),
             NSLayoutConstraint.init(item: logoutButton, attribute: .top, relatedBy: .equal,toItem: homeTextField, attribute: .bottom, multiplier: 1.0, constant: 10),
-            NSLayoutConstraint.init(item: logoutButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant:Size.CMTextFieldSize.width),
+            NSLayoutConstraint.init(item: logoutButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant:200),
             NSLayoutConstraint.init(item: logoutButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 40)])
         
 //        self.view.addConstraints([
@@ -84,11 +85,10 @@ class RightMenuViewController: UIViewController {
     
     func logoutAction(){
         
-       
-        UserDefaults.standard.removeObject(forKey: "thisContenant")
-        UserDefaults.standard.removeObject(forKey: "thisContenantFirstName")
-        UserDefaults.standard.removeObject(forKey: "thisContenantLastName")
-        UserDefaults.standard.removeObject(forKey: "thisHomeID")
+        Constants.thisCotentant = nil
+//        UserDefaults.standard.removeObject(forKey: "thisContenantFirstName")
+//        UserDefaults.standard.removeObject(forKey: "thisContenantLastName")
+//        UserDefaults.standard.removeObject(forKey: "thisHomeID")
         
         self.mm_drawerController.closeDrawer(animated: true, completion: nil)
        _ = (self.mm_drawerController.centerViewController as? UINavigationController)?.popToRootViewController(animated: true)

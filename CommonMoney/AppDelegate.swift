@@ -14,31 +14,32 @@ import MMDrawerController
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow.init(frame: UIScreen.main.bounds)
         
         FIRApp.configure()
+        GADMobileAds.configure(withApplicationID: "ca-app-pub-9803756475242056~8464834923")
         
         let startVC = LoginOrRegisterViewController()
-        let rightDrawerControler =  RightMenuViewController()
+        let leftDrawerControler =  LeftMenuViewController()
         
         let nvc = UINavigationController.init(rootViewController: startVC)
         
         nvc.navigationBar.isTranslucent = false
-        nvc.navigationBar.tintColor = Colors.darkBlue
-//        nvc.navigationBar.backgroundColor = Colors.
+        nvc.navigationBar.tintColor = Constants.Colors.purple
         
-        let drawerController = MMDrawerController.init(center: nvc, leftDrawerViewController: rightDrawerControler)
+        let drawerController = MMDrawerController.init(center: nvc, leftDrawerViewController: leftDrawerControler)
         
         guard (drawerController != nil) else{
             return false
         }
         
-        drawerController?.openDrawerGestureModeMask = MMOpenDrawerGestureMode.bezelPanningCenterView
+        drawerController?.openDrawerGestureModeMask = MMOpenDrawerGestureMode.all
         drawerController?.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.all
         drawerController?.centerHiddenInteractionMode = .none
+        drawerController?.maximumLeftDrawerWidth = 80
         
         window?.rootViewController = drawerController
         window?.makeKeyAndVisible()

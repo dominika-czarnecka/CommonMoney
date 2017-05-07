@@ -26,7 +26,7 @@ class CMTextField: UIView, UITextFieldDelegate{
         
         self.addSubview(separatorView)
         separatorView.translatesAutoresizingMaskIntoConstraints = false
-        separatorView.backgroundColor = Colors.lightGray
+        separatorView.backgroundColor = Constants.Colors.lightGray
         
         self.addSubview(typeLabel)
         typeLabel.text = type

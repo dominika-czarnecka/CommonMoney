@@ -25,18 +25,18 @@ class AddBillImageView: UIView {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.appFont(bold: false, fontSize: 12)
-        titleLabel.textColor = Colors.buttonBlue
+        titleLabel.textColor = Constants.Colors.buttonBlue
         titleLabel.text = "Bill"
         
         self.addSubview(separatorView)
         separatorView.translatesAutoresizingMaskIntoConstraints = false
-        separatorView.backgroundColor = Colors.buttonBlue
+        separatorView.backgroundColor = Constants.Colors.buttonBlue
         
         //TODO: Use cocoa to scan ractangue https://github.com/mukyasa/MMCamScanner
         self.addSubview(imageButton)
         imageButton.translatesAutoresizingMaskIntoConstraints = false
         imageButton.setImage(#imageLiteral(resourceName: "add"), for: .normal)
-        imageButton.tintColor = Colors.buttonBlue
+        imageButton.tintColor = Constants.Colors.buttonBlue
         imageButton.clipsToBounds = true
         imageButton.contentMode = .scaleAspectFit
         

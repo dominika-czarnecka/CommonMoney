@@ -144,11 +144,12 @@ class LoginOrRegisterViewController: BaseViewController, UIScrollViewDelegate {
                 if let owner = Mapper<Cotenant>().map(JSON: snapshot.value as? [String : Any] ?? [:]) {
                     
                     if owner.login == user?.email{
+                        Constants.thisCotentant = owner
                         
-                        UserDefaults.standard.set(owner.homeId, forKey: "thisHomeID")
-                        UserDefaults.standard.set(owner.id, forKey: "thisContenant")
-                        UserDefaults.standard.set(owner.firstName, forKey: "thisContenantFirstName")
-                        UserDefaults.standard.set(owner.lastName, forKey: "thisContenantLastName")
+//                        UserDefaults.standard.set(owner.homeId, forKey: "thisHomeID")
+//                        UserDefaults.standard.set(owner.id, forKey: "thisContenant")
+//                        UserDefaults.standard.set(owner.firstName, forKey: "thisContenantFirstName")
+//                        UserDefaults.standard.set(owner.lastName, forKey: "thisContenantLastName")
                         self.navigationController?.pushViewController(MainViewController(), animated: true)
                         return
                     }
@@ -182,7 +183,7 @@ class LoginOrRegisterViewController: BaseViewController, UIScrollViewDelegate {
                 
                 self.homeID = newHomeRef.key
                 
-                UserDefaults.standard.set(self.homeID, forKey: "thisHomeID")
+               // UserDefaults.standard.set(self.homeID, forKey: "thisHomeID")
                 
                 let home = Home.init(id: self.homeID)
                 
@@ -199,11 +200,9 @@ class LoginOrRegisterViewController: BaseViewController, UIScrollViewDelegate {
                 
                 let newCotenantRef = self.ref.childByAutoId()
                 
-                let cotenantID: String = newCotenantRef.key
+                let cotenant = Cotenant.init(id: newCotenantRef.key, login: email, firstName: firstName, lastName: lastName, homeId: self.homeID, isAdmin: true)
                 
-                UserDefaults.standard.set(cotenantID, forKey: "thisContenant")
-                
-                let cotenant = Cotenant.init(id: cotenantID, login: email, firstName: firstName, lastName: lastName, homeId: self.homeID, isAdmin: true)
+           //     UserDefaults.standard.set(cotenantID, forKey: "thisContenant")
                 
                 newCotenantRef.setValue(cotenant.toJSON())
                 

@@ -32,7 +32,7 @@ class BillDetailsViewController: BaseViewController, UIImagePickerControllerDele
     
     init(bill: Bill, owner: Cotenant){
         
-        let user = UserDefaults.standard.object(forKey: "thisContenant") as? String
+        let user = Constants.thisCotentant
         
         self.activityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         
@@ -41,7 +41,7 @@ class BillDetailsViewController: BaseViewController, UIImagePickerControllerDele
         
         super.init()
         
-        if owner.id == user{
+        if owner.id == user?.id{
             
             let deleteItem = UIBarButtonItem.init(title: "Delete", style: .done, target: self, action: #selector(deleteItemAction))
             self.navigationItem.setRightBarButton(deleteItem, animated: true)
@@ -134,48 +134,48 @@ class BillDetailsViewController: BaseViewController, UIImagePickerControllerDele
             ])
         
         self.scrollView.addConstraints(
-            [NSLayoutConstraint.init(item: whoTextField, attribute: .top, relatedBy: .equal, toItem: self.scrollView, attribute: .top, multiplier: 1.0, constant: Space.CMTtextFieldSpace),
+            [NSLayoutConstraint.init(item: whoTextField, attribute: .top, relatedBy: .equal, toItem: self.scrollView, attribute: .top, multiplier: 1.0, constant: Constants.Space.CMTtextFieldSpace),
              NSLayoutConstraint.init(item: whoTextField, attribute: .centerX, relatedBy: .equal, toItem: self.scrollView, attribute: .centerX, multiplier: 1.0, constant: 0),
              NSLayoutConstraint.init(item: whoTextField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 40),
-             NSLayoutConstraint.init(item: whoTextField, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: Size.CMTextFieldSize.width)
+             NSLayoutConstraint.init(item: whoTextField, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: Constants.Size.CMTextFieldSize.width)
             ])
         
         self.scrollView.addConstraints(
-            [NSLayoutConstraint.init(item: titleTextField, attribute: .top, relatedBy: .equal, toItem: whoTextField, attribute: .bottom, multiplier: 1.0, constant: Space.CMTtextFieldSpace),
+            [NSLayoutConstraint.init(item: titleTextField, attribute: .top, relatedBy: .equal, toItem: whoTextField, attribute: .bottom, multiplier: 1.0, constant: Constants.Space.CMTtextFieldSpace),
              NSLayoutConstraint.init(item: titleTextField, attribute: .centerX, relatedBy: .equal, toItem: self.scrollView, attribute: .centerX, multiplier: 1.0, constant: 0),
              NSLayoutConstraint.init(item: titleTextField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 40),
-             NSLayoutConstraint.init(item: titleTextField, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: Size.CMTextFieldSize.width)
+             NSLayoutConstraint.init(item: titleTextField, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: Constants.Size.CMTextFieldSize.width)
             ])
         
         self.scrollView.addConstraints(
-            [NSLayoutConstraint.init(item: typeTextField, attribute: .top, relatedBy: .equal, toItem: titleTextField, attribute: .bottom, multiplier: 1.0, constant: Space.CMTtextFieldSpace),
+            [NSLayoutConstraint.init(item: typeTextField, attribute: .top, relatedBy: .equal, toItem: titleTextField, attribute: .bottom, multiplier: 1.0, constant: Constants.Space.CMTtextFieldSpace),
              NSLayoutConstraint.init(item: typeTextField, attribute: .centerX, relatedBy: .equal, toItem: priceTextField, attribute: .centerX, multiplier: 1.0, constant: 0),
              NSLayoutConstraint.init(item: typeTextField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 40),
-             NSLayoutConstraint.init(item: typeTextField, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: Size.CMTextFieldSize.width)
+             NSLayoutConstraint.init(item: typeTextField, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: Constants.Size.CMTextFieldSize.width)
             ])
         
         self.scrollView.addConstraints(
-            [NSLayoutConstraint.init(item: priceTextField, attribute: .top, relatedBy: .equal, toItem: typeTextField, attribute: .bottom, multiplier: 1.0, constant: Space.CMTtextFieldSpace),
+            [NSLayoutConstraint.init(item: priceTextField, attribute: .top, relatedBy: .equal, toItem: typeTextField, attribute: .bottom, multiplier: 1.0, constant: Constants.Space.CMTtextFieldSpace),
              NSLayoutConstraint.init(item: priceTextField, attribute: .centerX, relatedBy: .equal, toItem: self.scrollView, attribute: .centerX, multiplier: 1.0, constant: 0),
              NSLayoutConstraint.init(item: priceTextField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 40),
-             NSLayoutConstraint.init(item: priceTextField, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: Size.CMTextFieldSize.width)
+             NSLayoutConstraint.init(item: priceTextField, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: Constants.Size.CMTextFieldSize.width)
             ])
         
         
         self.scrollView.addConstraints(
-            [NSLayoutConstraint.init(item: dateTextField, attribute: .top, relatedBy: .equal, toItem: priceTextField , attribute: .bottom, multiplier: 1.0, constant: Space.CMTtextFieldSpace),
+            [NSLayoutConstraint.init(item: dateTextField, attribute: .top, relatedBy: .equal, toItem: priceTextField , attribute: .bottom, multiplier: 1.0, constant: Constants.Space.CMTtextFieldSpace),
              NSLayoutConstraint.init(item: dateTextField, attribute: .centerX, relatedBy: .equal, toItem: self.scrollView, attribute: .centerX, multiplier: 1.0, constant: 0),
              NSLayoutConstraint.init(item: dateTextField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 40),
-             NSLayoutConstraint.init(item: dateTextField, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: Size.CMTextFieldSize.width)
+             NSLayoutConstraint.init(item: dateTextField, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: Constants.Size.CMTextFieldSize.width)
             ])
         
         imageHeightContraint = NSLayoutConstraint.init(item: imageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 80)
         
         self.scrollView.addConstraints(
-            [NSLayoutConstraint.init(item: imageView, attribute: .top, relatedBy: .equal, toItem: dateTextField, attribute: .bottom, multiplier: 1.0, constant: Space.CMTtextFieldSpace),
+            [NSLayoutConstraint.init(item: imageView, attribute: .top, relatedBy: .equal, toItem: dateTextField, attribute: .bottom, multiplier: 1.0, constant: Constants.Space.CMTtextFieldSpace),
              NSLayoutConstraint.init(item: imageView, attribute: .centerX, relatedBy: .equal, toItem: self.scrollView, attribute: .centerX, multiplier: 1.0, constant: 0),
              imageHeightContraint!,
-             NSLayoutConstraint.init(item: imageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: Size.CMTextFieldSize.width),
+             NSLayoutConstraint.init(item: imageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: Constants.Size.CMTextFieldSize.width),
              NSLayoutConstraint.init(item: imageView, attribute: .bottom, relatedBy: .equal, toItem: self.scrollView, attribute: .bottom, multiplier: 1.0, constant: -40)
             ])
     }

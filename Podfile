@@ -19,6 +19,7 @@ def import_common_pods
 	pod 'Firebase/Messaging'
 	pod 'Firebase/Auth'
 	pod 'Firebase/Database'
+  pod 'Firebase/AdMob'
   pod 'Charts'
 end
 
