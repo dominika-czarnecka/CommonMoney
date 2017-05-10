@@ -112,7 +112,7 @@ class BillDetailsViewController: BaseViewController, UIImagePickerControllerDele
             
             self.ref.child((self.bill?.id)!).removeValue { (error, ref) in
                 if error != nil {
-                    print("error \(error)")
+                    print("error" + (error?.localizedDescription ?? "Error"))
                 }else{
                     _ = self.navigationController?.popViewController(animated: true)
                 }

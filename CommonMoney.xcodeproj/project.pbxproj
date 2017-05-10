@@ -30,6 +30,7 @@
 		15B761761EBB13E10023F60B /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B761751EBB13E10023F60B /* LeftMenuViewController.swift */; };
 		15DD9DEF1EA64A6000FB9C4A /* CMChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DD9DEE1EA64A6000FB9C4A /* CMChartTableViewCell.swift */; };
 		15E122CE1EBF098500F2F9ED /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E122CD1EBF098500F2F9ED /* HistoryViewController.swift */; };
+		15E122D01EBF769300F2F9ED /* HistoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E122CF1EBF769300F2F9ED /* HistoryDetailsViewController.swift */; };
 		15EA39901E1FF59100DC48C7 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EA398F1E1FF59100DC48C7 /* RegisterView.swift */; };
 		15EB9B071DE629B2002C6C76 /* CMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EB9B061DE629B2002C6C76 /* CMButton.swift */; };
 		15EB9B121DE62BF7002C6C76 /* FiraSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15EB9B091DE62BF7002C6C76 /* FiraSans-Bold.ttf */; };
@@ -92,6 +93,7 @@
 		15B761751EBB13E10023F60B /* LeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LeftMenuViewController.swift; path = Controllers/Main/LeftMenuViewController.swift; sourceTree = "<group>"; };
 		15DD9DEE1EA64A6000FB9C4A /* CMChartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CMChartTableViewCell.swift; path = Controllers/Main/CMChartTableViewCell.swift; sourceTree = "<group>"; };
 		15E122CD1EBF098500F2F9ED /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HistoryViewController.swift; path = Controllers/History/HistoryViewController.swift; sourceTree = "<group>"; };
+		15E122CF1EBF769300F2F9ED /* HistoryDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HistoryDetailsViewController.swift; path = Controllers/History/HistoryDetailsViewController.swift; sourceTree = "<group>"; };
 		15EA398F1E1FF59100DC48C7 /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterView.swift; path = Controllers/LoginOrRegister/RegisterView.swift; sourceTree = "<group>"; };
 		15EB9B061DE629B2002C6C76 /* CMButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CMButton.swift; path = SupportingFiles/Views/CMButton.swift; sourceTree = "<group>"; };
 		15EB9B091DE62BF7002C6C76 /* FiraSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraSans-Bold.ttf"; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				15E122CD1EBF098500F2F9ED /* HistoryViewController.swift */,
+				15E122CF1EBF769300F2F9ED /* HistoryDetailsViewController.swift */,
 			);
 			name = History;
 			sourceTree = "<group>";
@@ -538,6 +541,7 @@
 				15F893D01E3693A4003118CF /* RightMenuViewController.swift in Sources */,
 				15E122CE1EBF098500F2F9ED /* HistoryViewController.swift in Sources */,
 				15445BCE1DE1B51300681801 /* Cotenant.swift in Sources */,
+				15E122D01EBF769300F2F9ED /* HistoryDetailsViewController.swift in Sources */,
 				1568F5DF1E166BB400315659 /* AddBillImageView.swift in Sources */,
 				15B761761EBB13E10023F60B /* LeftMenuViewController.swift in Sources */,
 				157A0B921DE61CD100C22E3F /* CMTextField.swift in Sources */,

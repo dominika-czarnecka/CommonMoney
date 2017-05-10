@@ -1,9 +1,9 @@
 //
-//  MainViewController.swift
+//  HistoryDetailsViewController.swift
 //  CommonMoney
 //
-//  Created by Dominika Czarnecka on 20.11.2016.
-//  Copyright © 2016 dominika.czarnecka. All rights reserved.
+//  Created by Dominika Czarnecka on 07.05.2017.
+//  Copyright © 2017 dominika.czarnecka. All rights reserved.
 //
 
 import UIKit
@@ -13,7 +13,7 @@ import ObjectMapper
 import MMDrawerController
 import GoogleMobileAds
 
-class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource{
+class HistoryDetailsViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource{
     
     let tableView = UITableView()
     let adsBanner = GADBannerView()
@@ -24,24 +24,27 @@ class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     var home: Home? = nil
     var homeRef = FIRDatabase.database().reference(withPath: "homes")
     
+    var owner: Cotenant?
+    var startDate: Double = 0
+    var endDate: Double = 0
+    
     var billsData: [String : Any] = [:]
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.title = "CommonyMoney"
+    init(owner: Cotenant?, startDate: Date, endDate: Date){
+        super.init()
+        self.owner = owner
+        self.startDate = startDate.timeIntervalSince1970
+        self.endDate = endDate.timeIntervalSince1970
     }
     
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        self.title = ""
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.isHidden = false
-        self.navigationItem.setHidesBackButton(true, animated: false)
-        
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : Constants.Colors.purple]
+        self.title = "History: " + (owner?.firstName ?? "")
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -57,7 +60,6 @@ class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         //Set defaults for billDates and billsPrices
         for i in 0...30{
             let dateToAdd = Date.init(timeIntervalSinceNow: Double(-60 * 60 * 24 * (30 - i))).dateToString(format: "dd-MM-yyyy")
-        
             billsData[dateToAdd] = 0
         }
         
@@ -70,15 +72,6 @@ class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         adsBanner.load(GADRequest())
         
         setupConstraints()
-        
-        //Add button
-        let addButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "add"), style: .done, target: self, action: #selector(addButtonAction))
-        
-        self.navigationItem.rightBarButtonItem = addButtonItem
-        
-        //Menu button
-        let menuButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "leftMenu"), style: .done, target: self, action: #selector(leftMenuAction))
-            self.navigationItem.leftBarButtonItem = menuButtonItem
         
         setupDatabaseObserver()
     }
@@ -98,7 +91,7 @@ class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             NSLayoutConstraint.init(item: adsBanner, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0)])
     }
     
-    //MARK: TableView Selegate and Data Source
+    //MARK: TableView Delegate and Data Source
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
@@ -125,7 +118,7 @@ class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard indexPath.row != 0 else {
-           return tableView.dequeueReusableCell(withIdentifier: "chart") as! CMChartTableViewCell
+            return tableView.dequeueReusableCell(withIdentifier: "chart") as! CMChartTableViewCell
         }
         
         if indexPath.row == 1{
@@ -133,8 +126,6 @@ class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! CMBillTableViewCell
-        
-//                cell = CMBillTableViewCell.init(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
         
         cell.titleLabel.text = bills[indexPath.row].title
         
@@ -204,14 +195,10 @@ class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             return
         }
         
-       chartCell.chartView.data = chartData
+        chartCell.chartView.data = chartData
     }
     
     //MARK: Others methods
-    
-    func addButtonAction(){
-        self.navigationController?.pushViewController(AddBillViewController(), animated: true)
-    }
     
     func setupDatabaseObserver(){
         
@@ -228,7 +215,35 @@ class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             
         })
         
-        let ref = FIRDatabase.database().reference(withPath: "bills").queryOrdered(byChild: "homeID").queryEqual(toValue: self.homeID)
+        guard self.owner != nil else{
+            
+            let ref = FIRDatabase.database().reference(withPath: "bills").queryOrdered(byChild: "homeID").queryEqual(toValue: self.homeID)
+            
+            ref.observe(.childAdded, with: { (snapshot) in
+                if let bill = Mapper<Bill>().map(JSON: snapshot.value as? [String : Any] ?? [:]){
+                    
+                    print(bill.date)
+                    print(self.startDate)
+                    print(self.endDate)
+                    guard ((bill.date ?? 0) >= self.startDate) && ((bill.date ?? 0) <= self.endDate) else{
+                        return
+                    }
+                    
+                    self.bills.append(bill)
+                    self.bills = self.bills.sorted(by: { (Bill1, Bill2) -> Bool in
+                        return Bill1.date ?? 0 >= Bill2.date ?? 0
+                    })
+                    
+                    self.tableView.reloadData()
+                    self.setChart(dictionary: self.bills)
+                    
+                }
+            })
+            
+            return
+        }
+        
+        let ref = FIRDatabase.database().reference(withPath: "bills").queryOrdered(byChild: "ownerId").queryEqual(toValue: self.owner?.id)
         
         ref.observe(.childAdded, with: { (snapshot) in
             if let bill = Mapper<Bill>().map(JSON: snapshot.value as? [String : Any] ?? [:]){
@@ -243,18 +258,7 @@ class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                 
             }
         })
-        
-        let refOwners = FIRDatabase.database().reference(withPath: "users").queryOrdered(byChild: "homeId").queryEqual(toValue: self.homeID)
-        
-        refOwners.observe(.childAdded, with: { (snapshot) in
-            if let owner = Mapper<Cotenant>().map(JSON: snapshot.value as? [String : Any] ?? [:]) {
-                Constants.cotenents.append(owner)
-            }
-        })
-    }
-    
-    func leftMenuAction(){
-        (self.navigationController?.parent as? MMDrawerController)?.open(.left, animated: true, completion: nil)
     }
     
 }
+

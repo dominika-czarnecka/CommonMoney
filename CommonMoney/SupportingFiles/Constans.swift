@@ -11,6 +11,7 @@ import UIKit
 struct Constants{
     
     static var thisCotentant: Cotenant?
+    static var cotenents: [Cotenant] = []
     
     struct Colors{
         

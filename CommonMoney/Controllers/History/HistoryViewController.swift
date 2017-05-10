@@ -7,22 +7,28 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import ObjectMapper
 
-class HistoryViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class HistoryViewController: BaseViewController, UIPickerViewDelegate{
     
     let colaborantTextField = CMTextField(type: "Who?", picker: true)
     let startDateTextField = CMTextField(type: "Start date?", dataPicker: true)
     let endDateTextField = CMTextField(type: "End date?", dataPicker: true)
     
-    var pickerOptions: [String] = []
+    var owner: Cotenant?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "History"
+        let doneItem = UIBarButtonItem.init(title: "Done", style: .done, target: self, action: #selector(doneItemAction))
+        self.navigationItem.setRightBarButton(doneItem, animated: true)
+        
         self.view.addSubview(colaborantTextField)
         colaborantTextField.translatesAutoresizingMaskIntoConstraints = false
-        colaborantTextField.pickerView.delegate = self
         colaborantTextField.pickerView.tag = 0
+        colaborantTextField.pickerView.delegate = self
         
         let formater = DateFormatter()
         formater.dateFormat = "dd-MM-yyyy"
@@ -72,42 +78,34 @@ class HistoryViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerOptions.count
+        return Constants.cotenents.count + 1
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerOptions[row]
+        if row == 0{
+            return "All"
+        }
+        return (Constants.cotenents[row - 1].firstName ?? "") + " " + (Constants.cotenents[row - 1].lastName ?? "")
     }
-    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        colaborantTextField.titleLabel.text = pickerOptions[row]
+        
+        if row == 0{
+            self.owner = nil
+            self.colaborantTextField.titleLabel.text = "All"
+        }else{
+            self.owner = Constants.cotenents[row - 1]
+            self.colaborantTextField.titleLabel.text = (Constants.cotenents[row - 1].firstName ?? "") + " " + (Constants.cotenents[row - 1].lastName ?? "")
+        }
+        
     }
     
     func doneItemAction(){
         
-//        let dateFormatter = DateFormatter.init()
-//        dateFormatter.dateFormat = "dd-MM-yyyy"
-//        
-//        let title = colaborantTextField.titleLabel.text!
-//        let type = colaborantTextField.titleLabel.text!
-//        let price = colaborantTextField.titleLabel.text!
-//        let date = colaborantTextField.titleLabel.text!
-//        
-//        //3
-//        let newBillRef = self.ref
-//            .childByAutoId()
-//        
-//        let newBillId = newBillRef.key
-//        
-//        let photo = imageView.imageButton.image(for: .normal) != #imageLiteral(resourceName: "add") ? imageView.imageButton.image(for: .normal)?.toBase64(quality: 0.4) : nil
-//        
-//        let bill = Bill.init(id: newBillId, homeID: self.homeID, title: title, ownerId: self.cotenantID, date: dateFormatter.date(from: date)!.timeIntervalSince1970, fullPrice: type == "Income" ? Float(NSString(string: price).floatValue) : -Float(NSString(string: price).floatValue), type: type, photo: photo)
-//        
-//        // 4
-//        newBillRef .setValue(bill.toJSON())
-//        
-//        KVNProgress.showSuccess(withStatus: "Bill added")
-//        _ = self.navigationController?.popViewController(animated: true)
+        guard self.colaborantTextField.isValid(withPattern: "^.+$") else{
+            return
+        }
+        
+        self.navigationController?.pushViewController(HistoryDetailsViewController.init(owner: self.owner, startDate: self.startDateTextField.dataPickerView.date, endDate: self.endDateTextField.dataPickerView.date), animated: true)
         
     }
     

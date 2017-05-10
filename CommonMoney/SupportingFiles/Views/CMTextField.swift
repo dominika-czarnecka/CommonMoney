@@ -16,6 +16,7 @@ class CMTextField: UIView, UITextFieldDelegate{
     let typeLabel = UILabel()
     
     let pickerView = UIPickerView()
+    let dataPickerView = UIDatePicker()
     
     init(type: String, dataPicker: Bool = false, picker: Bool = false) {
         super.init(frame: CGRect.zero)
@@ -44,12 +45,11 @@ class CMTextField: UIView, UITextFieldDelegate{
         titleLabel.placeholder = type
         
         if dataPicker{
-            let picker = UIDatePicker()
-            picker.date = NSDate() as Date
-            picker.maximumDate = NSDate() as Date
-            picker.datePickerMode = .date
-            picker.addTarget(self, action: #selector(dateDidChange), for: .valueChanged)
-            titleLabel.inputView = picker
+            dataPickerView.date = NSDate() as Date
+            dataPickerView.maximumDate = NSDate() as Date
+            dataPickerView.datePickerMode = .date
+            dataPickerView.addTarget(self, action: #selector(dateDidChange), for: .valueChanged)
+            titleLabel.inputView = dataPickerView
             titleLabel.delegate = self
         }
         

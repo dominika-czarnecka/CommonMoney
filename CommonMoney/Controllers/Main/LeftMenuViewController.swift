@@ -43,6 +43,7 @@ class LeftMenuViewController: UIViewController {
         self.historyButton.layer.cornerRadius = 20
         self.historyButton.setImage(#imageLiteral(resourceName: "clock"), for: UIControlState.normal)
         self.historyButton.tintColor = Constants.Colors.purple
+        self.historyButton.addTarget(self, action: #selector(historyAction), for: .touchUpInside)
         self.view.addSubview(historyButton)
 
         self.view.addConstraints([
@@ -71,20 +72,15 @@ class LeftMenuViewController: UIViewController {
         
     }
 
+    func historyAction(){
+         self.mm_drawerController.closeDrawer(animated: true, completion: { (Bool) in
+            (self.mm_drawerController.centerViewController as! UINavigationController).pushViewController(HistoryViewController(), animated: true)
+         })
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
