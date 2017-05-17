@@ -116,19 +116,19 @@ class LoginOrRegisterViewController: BaseViewController, UIScrollViewDelegate {
     func loginButtonAction(){
         //TODO: change before realase
         
-        //        guard let email = loginView.loginTextField.titleLabel.text, let password = loginView.passwordTextField.titleLabel.text else {
-        //            loginView.loginTextField.shake()
-        //            loginView.passwordTextField.shake()
-        //            return
-        //        }
-        //
-        //        FIRAuth.auth()?.signIn(withEmail: email, password: password) { ( user, error) in
-        //            if let error = error {
-        //                print(error.localizedDescription)
-        //                self.loginView.passwordTextField.shake()
-        //                self.loginView.loginTextField.shake()
-        //                return
-        //            }
+//                guard let email = loginView.loginTextField.titleLabel.text, let password = loginView.passwordTextField.titleLabel.text else {
+//                    loginView.loginTextField.shake()
+//                    loginView.passwordTextField.shake()
+//                    return
+//                }
+//        
+//                FIRAuth.auth()?.signIn(withEmail: email, password: password) { ( user, error) in
+//                    if let error = error {
+//                        print(error.localizedDescription)
+//                        self.loginView.passwordTextField.shake()
+//                        self.loginView.loginTextField.shake()
+//                        return
+//                    }
         
         FIRAuth.auth()?.signIn(withEmail: "dominika@gmail.com", password: "dominika") { ( user, error) in
             
@@ -138,7 +138,7 @@ class LoginOrRegisterViewController: BaseViewController, UIScrollViewDelegate {
                 self.loginView.loginTextField.shake()
                 return
             }
-            
+
             self.ref.queryOrdered(byChild: "id").observe(.childAdded, with: { (snapshot) in
                 
                 if let owner = Mapper<Cotenant>().map(JSON: snapshot.value as? [String : Any] ?? [:]) {
@@ -181,6 +181,7 @@ class LoginOrRegisterViewController: BaseViewController, UIScrollViewDelegate {
                // UserDefaults.standard.set(self.homeID, forKey: "thisHomeID")
                 
                 let home = Home.init(id: self.homeID)
+                Constants.thisHome = home
                 
                 newHomeRef.setValue(home.toJSON())
                 

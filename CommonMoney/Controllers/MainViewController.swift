@@ -66,8 +66,10 @@ class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         self.adsBanner.translatesAutoresizingMaskIntoConstraints = false
         //Ads
         adsBanner.adUnitID = "ca-app-pub-9803756475242056/99415681266"
+        let request = GADRequest.init()
+        request.testDevices = ["Simulator"]
         adsBanner.rootViewController = self
-        adsBanner.load(GADRequest())
+        adsBanner.load(request)
         
         setupConstraints()
         
@@ -214,36 +216,43 @@ class MainViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     }
     
     func setupDatabaseObserver(){
-        
+        //Home bills
         self.bills = []
+        //Current home
         self.home = nil
         
+        //Search throu homes to find user's home
         homeRef.queryOrdered(byChild: "id").queryEqual(toValue: self.homeID).observe(.childAdded, with: {(Snapshot) in
             
             if let thisHome = Mapper<Home>().map(JSON: Snapshot.value as? [String : Any] ?? [:]) {
-                
+                //Set home and reset budget
                 self.home = thisHome
+                Constants.thisHome = thisHome
                 self.home?.budget = 0
             }
             
         })
         
+        //Fild home's bills
         let ref = FIRDatabase.database().reference(withPath: "bills").queryOrdered(byChild: "homeID").queryEqual(toValue: self.homeID)
         
         ref.observe(.childAdded, with: { (snapshot) in
             if let bill = Mapper<Bill>().map(JSON: snapshot.value as? [String : Any] ?? [:]){
-                
+                //Append bill to array
                 self.bills.append(bill)
+                //Sort array by date
                 self.bills = self.bills.sorted(by: { (Bill1, Bill2) -> Bool in
                     return Bill1.date ?? 0 >= Bill2.date ?? 0
                 })
                 
+                //Reload tableView and chart with new bill
                 self.tableView.reloadData()
                 self.setChart(dictionary: self.bills)
                 
             }
         })
         
+        //Find cotenants of user
         let refOwners = FIRDatabase.database().reference(withPath: "users").queryOrdered(byChild: "homeId").queryEqual(toValue: self.homeID)
         
         refOwners.observe(.childAdded, with: { (snapshot) in

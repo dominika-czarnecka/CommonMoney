@@ -29,6 +29,7 @@ class HistoryViewController: BaseViewController, UIPickerViewDelegate{
         colaborantTextField.translatesAutoresizingMaskIntoConstraints = false
         colaborantTextField.pickerView.tag = 0
         colaborantTextField.pickerView.delegate = self
+        self.colaborantTextField.titleLabel.text = "All"
         
         let formater = DateFormatter()
         formater.dateFormat = "dd-MM-yyyy"

@@ -25,12 +25,14 @@ class LeftMenuViewController: UIViewController {
         self.settingsButton.layer.cornerRadius = 20
         self.settingsButton.setImage(#imageLiteral(resourceName: "settings"), for: .normal)
         self.settingsButton.tintColor = Constants.Colors.purple
+        self.settingsButton.addTarget(self, action: #selector(settingsAction), for: .touchUpInside)
         self.view.addSubview(settingsButton)
         
         self.homeButton.translatesAutoresizingMaskIntoConstraints = false
         self.homeButton.layer.cornerRadius = 20
         self.homeButton.setImage(#imageLiteral(resourceName: "home"), for: UIControlState.normal)
         self.homeButton.tintColor = Constants.Colors.purple
+        self.homeButton.addTarget(self, action: #selector(homeAction), for: .touchUpInside)
         self.view.addSubview(homeButton)
         
         self.colaborantsButton.translatesAutoresizingMaskIntoConstraints = false
@@ -76,6 +78,19 @@ class LeftMenuViewController: UIViewController {
          self.mm_drawerController.closeDrawer(animated: true, completion: { (Bool) in
             (self.mm_drawerController.centerViewController as! UINavigationController).pushViewController(HistoryViewController(), animated: true)
          })
+    }
+    
+    
+    func settingsAction(){
+        self.mm_drawerController.closeDrawer(animated: true, completion: { (Bool) in
+            (self.mm_drawerController.centerViewController as! UINavigationController).pushViewController(SettingsViewController(user: Constants.thisCotentant!), animated: true)
+        })
+    }
+    
+    func homeAction(){
+        self.mm_drawerController.closeDrawer(animated: true, completion: { (Bool) in
+            (self.mm_drawerController.centerViewController as! UINavigationController).pushViewController(HomeInfoViewController(), animated: true)
+        })
     }
     
     override func didReceiveMemoryWarning() {

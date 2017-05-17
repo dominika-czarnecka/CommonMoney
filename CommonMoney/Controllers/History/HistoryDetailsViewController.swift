@@ -21,8 +21,10 @@ class HistoryDetailsViewController: BaseViewController, UITableViewDelegate, UIT
     let homeID = Constants.thisCotentant?.homeId
     
     var bills: [Bill] = []
+    var ownerBills: [Bill] = []
     var home: Home? = nil
     var homeRef = FIRDatabase.database().reference(withPath: "homes")
+    var noBillsLabel = UILabel()
     
     var owner: Cotenant?
     var startDate: Double = 0
@@ -69,7 +71,18 @@ class HistoryDetailsViewController: BaseViewController, UITableViewDelegate, UIT
         //Ads
         adsBanner.adUnitID = "ca-app-pub-9803756475242056/99415681266"
         adsBanner.rootViewController = self
-        adsBanner.load(GADRequest())
+        let request = GADRequest.init()
+        request.testDevices = ["Simulator"]
+        adsBanner.rootViewController = self
+        adsBanner.load(request)
+        
+        //NoBillsLabel
+        self.noBillsLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.noBillsLabel.text = "No resoults"
+        self.noBillsLabel.textAlignment  = .center
+        self.noBillsLabel.font = UIFont.systemFont(ofSize: 18)
+        self.noBillsLabel.textColor = Constants.Colors.purple
+        self.view.addSubview(noBillsLabel)
         
         setupConstraints()
         
@@ -89,6 +102,12 @@ class HistoryDetailsViewController: BaseViewController, UITableViewDelegate, UIT
             NSLayoutConstraint.init(item: adsBanner, attribute: .top, relatedBy: .equal,toItem: tableView, attribute: .bottom, multiplier: 1.0, constant: 0),
             NSLayoutConstraint.init(item: adsBanner, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1.0, constant: -10),
             NSLayoutConstraint.init(item: adsBanner, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0)])
+        
+        self.view.addConstraints([
+            NSLayoutConstraint.init(item: noBillsLabel, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1.0, constant: 0),
+            NSLayoutConstraint.init(item: noBillsLabel, attribute: .centerY, relatedBy: .equal,toItem: view, attribute: .centerY, multiplier: 1.0, constant: 0),
+            NSLayoutConstraint.init(item: noBillsLabel, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1.0, constant: -10),
+            NSLayoutConstraint.init(item: noBillsLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 100)])
     }
     
     //MARK: TableView Delegate and Data Source
@@ -99,20 +118,13 @@ class HistoryDetailsViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return bills.count
+        return ownerBills.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        for owner in Constants.cotenents{
-            if owner.id == bills[indexPath.row].ownerId{
-                
-                self.navigationController?.pushViewController(BillDetailsViewController.init(bill: bills[indexPath.row], owner: owner), animated: true)
-                return
-            }
-            
-        }
+        self.navigationController?.pushViewController(BillDetailsViewController.init(bill: bills[indexPath.row], owner: self.owner!), animated: true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -121,27 +133,25 @@ class HistoryDetailsViewController: BaseViewController, UITableViewDelegate, UIT
             return tableView.dequeueReusableCell(withIdentifier: "chart") as! CMChartTableViewCell
         }
         
-        if indexPath.row == 1{
-            self.setChart(dictionary: self.bills)
-        }
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! CMBillTableViewCell
         
-        cell.titleLabel.text = bills[indexPath.row].title
+        cell.titleLabel.text = ownerBills[indexPath.row].title
         
-        cell.ownerAndDateLabel.text = Date.init(timeIntervalSince1970: Double(bills[indexPath.row].date ?? 0)).dateToString(format: "dd-MM-yyyy")
-        cell.priceLabel.text = bills[indexPath.row].price?.description
-        cell.separatorView.backgroundColor = (self.bills[indexPath.row].price ?? 0 >= 0) ? UIColor.green : UIColor.red
+        cell.ownerAndDateLabel.text = Date.init(timeIntervalSince1970: Double(ownerBills[indexPath.row].date ?? 0)).dateToString(format: "dd-MM-yyyy")
+        cell.priceLabel.text = ownerBills[indexPath.row].price?.description
+        cell.separatorView.backgroundColor = (self.ownerBills[indexPath.row].price ?? 0 >= 0) ? UIColor.green : UIColor.red
         
         //TODO: change for ownerImage, not bill image
-        cell.ownerImage.image = bills[indexPath.row].photo?.convertBase64ToImage()
+        cell.ownerImage.image = ownerBills[indexPath.row].photo?.convertBase64ToImage()
         
         return cell
     }
     
     //MARK: Chart Data Source and Delegate methods
     
-    func setChart(dictionary: [Bill]){
+    func setChart(_ dictionary: [Bill], ownerBills: [Bill] = []){
+        
+        var dataSets = [LineChartDataSet]()
         
         var dataEntries: [ChartDataEntry] = []
         
@@ -150,6 +160,7 @@ class HistoryDetailsViewController: BaseViewController, UITableViewDelegate, UIT
         }
         
         var entries: [Float] = []
+        
         var e = 0
         
         if dict.count > 0 {
@@ -164,7 +175,7 @@ class HistoryDetailsViewController: BaseViewController, UITableViewDelegate, UIT
                 
                 entries[e] += dict[i].price ?? 0
             }else{
-                entries.append(entries[e] + (dict[i].price ?? 0))
+                entries.append(dict[i].price ?? 0)
                 e += 1
             }
         }
@@ -175,20 +186,61 @@ class HistoryDetailsViewController: BaseViewController, UITableViewDelegate, UIT
             dataEntries.append(dataEntry)
         }
         
-        let chartDataSet = LineChartDataSet.init(values: dataEntries, label: "Budget")
+        let chartDataSet = LineChartDataSet.init(values: dataEntries, label: "All")
         
         chartDataSet.axisDependency = .left
-        chartDataSet.setCircleColor(Constants.Colors.purple)
-        chartDataSet.setColor(Constants.Colors.purple)
+        chartDataSet.setCircleColor(Constants.Colors.lightBlue)
+        chartDataSet.setColor(Constants.Colors.lightBlue)
         chartDataSet.lineWidth = 2.0
         chartDataSet.circleRadius = 3.0
-        chartDataSet.highlightColor = Constants.Colors.purple
+        chartDataSet.highlightColor = Constants.Colors.lightBlue
         
-        var dataSets = [LineChartDataSet]()
         dataSets.append(chartDataSet)
         
+        //Owners line
+        if ownerBills.count > 0{
+            var ownerDataEntries: [ChartDataEntry] = []
+            
+            var ownerDict = ownerBills.sorted{ (value1, value2) -> Bool in
+                return (value1.date ?? 0) < (value2.date ?? 0)
+            }
+            
+            var ownerEntries: [Float] = []
+            var e = 0
+            
+            ownerEntries.append(ownerDict[0].price ?? 0)
+            
+            for i in 1..<ownerDict.count{
+                
+                if Date.init(timeIntervalSince1970: (ownerDict[i-1].date ?? 0)).dateToString(format: "dd-MM-yyyy") == Date.init(timeIntervalSince1970: (ownerDict[i].date ?? 0)).dateToString(format: "dd-MM-yyyy"){
+                    ownerEntries[e] += ownerDict[i].price ?? 0
+                }else{
+                    ownerEntries.append(ownerDict[i].price ?? 0)
+                    e += 1
+                }
+            }
+            
+            for i in 0..<ownerEntries.count{
+                let dataEntry = ChartDataEntry.init(x: Double(i), y: Double(ownerEntries[i]), data: nil)
+                
+                ownerDataEntries.append(dataEntry)
+            }
+            
+            let ownerChartDataSet = LineChartDataSet.init(values: ownerDataEntries, label: self.owner?.firstName)
+            
+            ownerChartDataSet.axisDependency = .left
+            ownerChartDataSet.setCircleColor(Constants.Colors.purple)
+            ownerChartDataSet.setColor(Constants.Colors.purple)
+            ownerChartDataSet.lineWidth = 2.0
+            ownerChartDataSet.circleRadius = 3.0
+            ownerChartDataSet.highlightColor = Constants.Colors.purple
+            
+            dataSets.append(ownerChartDataSet)
+            
+        }
+        
         let chartData = LineChartData.init(dataSets: dataSets)
-        chartData.setValueTextColor(Constants.Colors.purple)
+        chartData.setValueTextColor(Constants.Colors.lightBlue)
         chartData.setValueFont(UIFont.appFont(bold: true, fontSize: 10))
         
         guard let chartCell = self.tableView.cellForRow(at: IndexPath.init(row: 0, section: 0)) as? CMChartTableViewCell else {
@@ -215,47 +267,38 @@ class HistoryDetailsViewController: BaseViewController, UITableViewDelegate, UIT
             
         })
         
-        guard self.owner != nil else{
-            
-            let ref = FIRDatabase.database().reference(withPath: "bills").queryOrdered(byChild: "homeID").queryEqual(toValue: self.homeID)
-            
-            ref.observe(.childAdded, with: { (snapshot) in
-                if let bill = Mapper<Bill>().map(JSON: snapshot.value as? [String : Any] ?? [:]){
-                    
-                    print(bill.date)
-                    print(self.startDate)
-                    print(self.endDate)
-                    guard ((bill.date ?? 0) >= self.startDate) && ((bill.date ?? 0) <= self.endDate) else{
-                        return
-                    }
-                    
-                    self.bills.append(bill)
-                    self.bills = self.bills.sorted(by: { (Bill1, Bill2) -> Bool in
-                        return Bill1.date ?? 0 >= Bill2.date ?? 0
-                    })
-                    
-                    self.tableView.reloadData()
-                    self.setChart(dictionary: self.bills)
-                    
-                }
-            })
-            
-            return
-        }
-        
-        let ref = FIRDatabase.database().reference(withPath: "bills").queryOrdered(byChild: "ownerId").queryEqual(toValue: self.owner?.id)
+        let ref = FIRDatabase.database().reference(withPath: "bills").queryOrdered(byChild: "homeID").queryEqual(toValue: self.homeID)
         
         ref.observe(.childAdded, with: { (snapshot) in
             if let bill = Mapper<Bill>().map(JSON: snapshot.value as? [String : Any] ?? [:]){
+                
+                guard ((bill.date ?? 0) >= self.startDate) && ((bill.date ?? 0) <= self.endDate) else{
+                    return
+                }
                 
                 self.bills.append(bill)
                 self.bills = self.bills.sorted(by: { (Bill1, Bill2) -> Bool in
                     return Bill1.date ?? 0 >= Bill2.date ?? 0
                 })
                 
-                self.tableView.reloadData()
-                self.setChart(dictionary: self.bills)
+                self.noBillsLabel.isHidden = true
                 
+                if self.owner == nil{
+                    
+                    self.tableView.reloadData()
+                    self.setChart(self.bills)
+                }else{
+                    
+                    if bill.ownerId == self.owner?.id{
+                        self.ownerBills.append(bill)
+                    }
+                    self.bills = self.bills.sorted(by: { (Bill1, Bill2) -> Bool in
+                        return Bill1.date ?? 0 >= Bill2.date ?? 0
+                    })
+                    
+                    self.tableView.reloadData()
+                    self.setChart(self.bills, ownerBills: self.ownerBills)
+                }
             }
         })
     }

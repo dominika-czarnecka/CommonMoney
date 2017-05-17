@@ -14,6 +14,9 @@
 		1568F5DF1E166BB400315659 /* AddBillImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1568F5DE1E166BB400315659 /* AddBillImageView.swift */; };
 		1568F5E21E1672E400315659 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1568F5E11E1672E400315659 /* LoginView.swift */; };
 		157A0B921DE61CD100C22E3F /* CMTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157A0B911DE61CD100C22E3F /* CMTextField.swift */; };
+		158487891ECC290E00DB0E13 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158487881ECC290E00DB0E13 /* SettingsViewController.swift */; };
+		1584878C1ECC321500DB0E13 /* ColaborantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1584878B1ECC321500DB0E13 /* ColaborantsViewController.swift */; };
+		158487901ECC328C00DB0E13 /* HomeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1584878F1ECC328C00DB0E13 /* HomeInfoViewController.swift */; };
 		158B74911DE63EB9005306D5 /* CMBillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158B74901DE63EB9005306D5 /* CMBillTableViewCell.swift */; };
 		158D42581E2F8F09003C356D /* BillDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158D42571E2F8F09003C356D /* BillDetailsViewController.swift */; };
 		1591677C1DE1B6840040FDD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1591677B1DE1B6840040FDD2 /* AppDelegate.swift */; };
@@ -71,6 +74,9 @@
 		1568F5DE1E166BB400315659 /* AddBillImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddBillImageView.swift; path = Controllers/AddBill/AddBillImageView.swift; sourceTree = "<group>"; };
 		1568F5E11E1672E400315659 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = Controllers/LoginOrRegister/LoginView.swift; sourceTree = "<group>"; };
 		157A0B911DE61CD100C22E3F /* CMTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CMTextField.swift; path = SupportingFiles/Views/CMTextField.swift; sourceTree = "<group>"; };
+		158487881ECC290E00DB0E13 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = Settings/SettingsViewController.swift; sourceTree = "<group>"; };
+		1584878B1ECC321500DB0E13 /* ColaborantsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColaborantsViewController.swift; path = Colaborants/ColaborantsViewController.swift; sourceTree = "<group>"; };
+		1584878F1ECC328C00DB0E13 /* HomeInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeInfoViewController.swift; path = Settings/HomeInfoViewController.swift; sourceTree = "<group>"; };
 		158B74901DE63EB9005306D5 /* CMBillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CMBillTableViewCell.swift; path = SupportingFiles/Views/CMBillTableViewCell.swift; sourceTree = "<group>"; };
 		158D42571E2F8F09003C356D /* BillDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BillDetailsViewController.swift; path = Controllers/BillDetails/BillDetailsViewController.swift; sourceTree = "<group>"; };
 		159167781DE1B6840040FDD2 /* CommonMoney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CommonMoney.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -178,6 +184,16 @@
 			name = Main;
 			sourceTree = "<group>";
 		};
+		1584878E1ECC325B00DB0E13 /* LeftMenu */ = {
+			isa = PBXGroup;
+			children = (
+				158487881ECC290E00DB0E13 /* SettingsViewController.swift */,
+				1584878F1ECC328C00DB0E13 /* HomeInfoViewController.swift */,
+				1584878B1ECC321500DB0E13 /* ColaborantsViewController.swift */,
+			);
+			name = LeftMenu;
+			sourceTree = "<group>";
+		};
 		158D42561E2F8ED7003C356D /* BillDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +260,7 @@
 		159167A91DE1B6850040FDD2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1584878E1ECC325B00DB0E13 /* LeftMenu */,
 				1568F5E01E1672BF00315659 /* LoginOrRegister */,
 				157EF6321E216A1600B0DC84 /* Main */,
 				15343A641DF85D3200A25069 /* AddBill */,
@@ -383,7 +400,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = dominika.czarnecka;
 				TargetAttributes = {
 					159167771DE1B6840040FDD2 = {
@@ -528,6 +545,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				159167AE1DE1B6850040FDD2 /* MainViewController.swift in Sources */,
+				1584878C1ECC321500DB0E13 /* ColaborantsViewController.swift in Sources */,
 				159167B41DE1B6850040FDD2 /* Extensions.swift in Sources */,
 				158D42581E2F8F09003C356D /* BillDetailsViewController.swift in Sources */,
 				158B74911DE63EB9005306D5 /* CMBillTableViewCell.swift in Sources */,
@@ -542,12 +560,14 @@
 				15E122CE1EBF098500F2F9ED /* HistoryViewController.swift in Sources */,
 				15445BCE1DE1B51300681801 /* Cotenant.swift in Sources */,
 				15E122D01EBF769300F2F9ED /* HistoryDetailsViewController.swift in Sources */,
+				158487891ECC290E00DB0E13 /* SettingsViewController.swift in Sources */,
 				1568F5DF1E166BB400315659 /* AddBillImageView.swift in Sources */,
 				15B761761EBB13E10023F60B /* LeftMenuViewController.swift in Sources */,
 				157A0B921DE61CD100C22E3F /* CMTextField.swift in Sources */,
 				159167AC1DE1B6850040FDD2 /* LoginOrRegisterViewController.swift in Sources */,
 				15EA39901E1FF59100DC48C7 /* RegisterView.swift in Sources */,
 				1591677C1DE1B6840040FDD2 /* AppDelegate.swift in Sources */,
+				158487901ECC328C00DB0E13 /* HomeInfoViewController.swift in Sources */,
 				15EB9B071DE629B2002C6C76 /* CMButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

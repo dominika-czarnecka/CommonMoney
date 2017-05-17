@@ -26,7 +26,7 @@ class BaseViewController: UIViewController {
         
         let gradient = CAGradientLayer()
         gradient.frame = CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        gradient.colors = [Constants.Colors.purple.cgColor, UIColor(red:0.69, green:0.00, blue:0.40, alpha:1.00).withAlphaComponent(0.5).cgColor]
+        gradient.colors = [Constants.Colors.purple.cgColor, Constants.Colors.lightBlue.cgColor]
         gradient.locations = [0.0, 0.7, 1.0]
         gradient.startPoint = CGPoint.init(x: 0.5, y: 0)
         gradient.endPoint = CGPoint.init(x: 0.5, y: 1)
